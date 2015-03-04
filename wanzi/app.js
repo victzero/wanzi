@@ -30,15 +30,14 @@ ndir.mkdir(config.upload_img_dir, function(err) {// 建立上传文件目录
 
 var app = express();
 
-ejs.open = '{{';
-ejs.close = '}}';
-
 // all environments
 app.configure(function() {
 	app.set('title', 'Zero App');
 	app.set('port', 80);
 	app.set('env', 'production');
 
+	ejs.open = '{{';
+	ejs.close = '}}';
 	app.engine('.html', ejs.__express);
 	app.set('view engine', 'html');
 	app.set('views', path.join(__dirname, 'views'));// html 文件存放目录
