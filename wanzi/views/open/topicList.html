@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="zh-CN" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="zh-CN" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="zh-CN"> <!--<![endif]-->
+<head>
+	{{ include ./include/head.html }}
+	<meta name="keywords" content="护栏,科盛" />
+</head>
+<body>
+    {{ include ./include/header.html }}
+
+    <div class="page-container">
+    	<div class="row breadcrumbs margin-bottom-10">
+            <div class="container">
+                <div class="col-md-4 col-sm-4">
+                    <ul class="breadcrumb">
+                        <li><a href="/index">首页</a></li>
+                        {{- mess.isChild ? '<li>护栏分类</li>' : '' }}
+                        <li><a href="/list/{{= category }}">{{= mess.name }}</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-8 col-sm-8">
+                	<div class="text-center ">
+                		<h1>&nbsp;</h1>
+                	</div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+        
+            <!-- BEGIN TABS AND TESTIMONIALS -->
+            <div class="row mix-block">
+                {{ include ./include/body-left.html }}
+                
+                <div class="col-md-9">
+	                <div class="tab-style-1 margin-bottom-20">
+	                    <div class="tab-content">
+	                        <div class="tab-pane row fade in active show-images" >
+	                        	{{ list.forEach(function(obj, index){ }}
+		                            <div class="col-md-4 col-sm-4 gallery-item margin-bottom-15">
+										<a href="/topicDetail/{{= obj.category }}/{{= obj.id }}" >
+											<img alt="" src="{{= obj.img }}" class="img-responsive">
+											{{= obj.title }}
+										</a> 
+						            </div>
+						        {{ }); }}
+	                        </div>
+	                    </div>
+                    	<div class="dataTables_paginate flip-pagination pull-right paging_bootstrap">
+							{{ include ./include/pagination.html }}
+						</div>
+	                </div>
+                </div>
+            </div>                
+        </div>
+    </div>
+    {{ include ./include/footer.html }}
+	{{ include ./include/scripts.html }}
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            App.init();
+        });
+    </script>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"1","bdPos":"left","bdTop":"141.5"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+</body>
+</html>

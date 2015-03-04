@@ -1,0 +1,101 @@
+/** override **/
+body { 
+	font-family: "雅黑","Microsoft YaHei","宋体",'Open Sans','sans-serif';
+}
+
+.header .navbar-nav li a {
+	font-size: 16px;
+}
+
+h1, .h1 {
+font-size: 30px;
+}
+
+.tab-style-1 ul.nav-tabs li > a {
+	font-size: 16px;
+}
+
+.header a.logo-v1 img {
+	margin-top: 0;
+}
+
+/** kesheng app css **/
+.company-info img {
+	display: block;
+	height: auto;
+	max-width: 100%;
+	line-height: 1;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+.font-size-14 {
+	font-size: 14px;
+}
+
+.company-info p {
+	font-size: 16px;
+	margin-top: 22px;
+}
+
+.sidebar-news li a{
+	padding: 6px 0;
+	border-bottom: 0;
+	color: #333;
+}
+
+.sidebar-news li a:hover {
+	background: none;
+}
+.sidebar-news li > a:hover,
+.sidebar-news li.active > a,
+.sidebar-news li.active:hover > a {
+	color: #0da3e2;
+}
+
+.sidebar-news li a:before {
+    content: "";
+    font-family: FontAwesome !important;
+    font-size: 8px;
+    padding-right: 10px;
+    position: relative;
+    top: -1px;
+}
+
+.show-images {
+	text-align: center;
+}
+
+.show-images a{
+	padding: 6px 0;
+	border-bottom: 0;
+	color: #333;
+}
+
+.show-images a:hover {
+	background: none;
+}
+.show-images div > a:hover,
+.show-images div.active > a,
+.show-images div.active:hover > a {
+	color: #0da3e2;
+}
+
+.company-address {
+	line-height: 24px;
+}
+
+#imageCarousel .item {
+	text-align: center !important;
+}
+
+#imageCarousel .carousel-inner>.item>img, #imageCarousel .carousel-inner>.item>a>img {
+display: inherit;
+height: auto;
+max-width: 100%;
+line-height: 1;
+}
+
+.flip-pagination>ul>li a{
+	cursor: pointer !important;
+}

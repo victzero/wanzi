@@ -1,0 +1,22 @@
+
+<ul class="pagination">
+	{{ if(filter.pageNo - 1 <= 0){ }}
+	<li class="disabled"><a href="javascript:void(0);">&lt;&lt; 第一页</a></li>
+	<li class="disabled"><a href="javascript:void(0);">&lt;</a></li>
+	{{ } else { }}
+	<li><a href="{{= category }}/1" >&lt;&lt; 第一页</a></li>
+	<li><a href="{{= category }}/{{= filter.pageNo - 1 }}" >&lt;</a></li>
+	{{ } }}
+	
+	{{ for(var i = filter.pageStart,l = filter.pageEnd;i <= l; i++){ }}
+		<li class='{{= filter.pageNo == i ? "active": "" }}'><a  href="{{= category }}/{{= i }}">{{= i }}</a></li>
+	{{ } }}
+
+	{{ if(filter.pageNo >= filter.totalPage ){ }}
+		<li class="disabled"><a href="javascript:void(0);">&gt;</a></li>
+		<li class="disabled"><a href="javascript:void(0);">&gt;&gt; 最后一页</a></li>						
+	{{ } else { }}
+		<li><a href="{{= category }}/{{= Number(filter.pageNo) + 1 }}" >&gt;</a></li>
+		<li><a href="{{= category }}/{{= filter.totalPage }}" >&gt;&gt; 最后一页</a></li>				
+	{{ } }}
+</ul>

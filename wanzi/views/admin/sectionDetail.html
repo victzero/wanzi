@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="zh-CN" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="zh-CN" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!--> <html lang="zh-CN" class="no-js"> <!--<![endif]-->
+<head>
+	{{ include ./include/head.html }}
+</head>
+<body class="page-header-fixed page-sidebar-fixed page-footer-fixed ">
+	{{ include ./include/header.html }}
+	<div class="page-container">
+		{{ include ./include/body-left.html }}
+		<div class="page-content">
+			<!-- BEGIN PAGE HEADER-->
+			<div class="row">
+				<div class="col-md-12">
+					<!-- BEGIN PAGE TITLE & BREADCRUMB-->			
+					<h3 class="page-title">
+						护栏分类--{{= cons.name }}查看--{{= topic.title }}
+					</h3>
+					<ul class="page-breadcrumb breadcrumb">
+						<li>
+							<i class="fa fa-home"></i>
+							<a href="/admin">首页</a> 
+							<i class="fa fa-angle-right"></i>
+						</li>
+						<li>
+							<a href="/admin/cateList">护栏分类</a>
+							<i class="fa fa-angle-right"></i>
+						</li>
+						<li>
+							<a href="/admin/sectionList/{{= locals.category }}">{{= cons.name }}管理</a>
+							<i class="fa fa-angle-right"></i>
+						</li>
+						<li>查看</li>
+					</ul>
+					<!-- END PAGE TITLE & BREADCRUMB-->
+				</div>
+			</div>
+			<!-- END PAGE HEADER-->
+			<!-- BEGIN PAGE CONTENT-->
+			<div class="tab-pane ">
+				<div class="portlet box green">
+					<div class="portlet-title">
+						<div class="caption"><i class="fa fa-reorder"></i>{{= cons.name }}查看</div>
+						<div class="tools">
+							<a href="javascript:;" class="collapse"></a>
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<!-- BEGIN FORM-->
+						<form enctype="multipart/form-data" method="post" action="/admin/sectionEdit/{{= locals.category }}" class="form-horizontal">
+							<div class="form-body">
+								 <input type="hidden" name="id" value="${obj.id }">
+		                         <div class="form-group">
+		                            <label class="control-label col-md-2">标题<span class="required">*</span></label>
+		                            <div class="col-md-4">
+			                            <input type="text" name="topic[title]" disabled="disabled" value="{{= typeof topic.title!='undefined' ? topic.title : ''}}" class="form-control" placeholder="标题">
+		                            </div>
+		                         </div>
+			                     <div class="form-group">
+		                            <label class="control-label col-md-2">关键词<span class="required">*</span></label>
+		                            <div class="col-md-4">
+			                            <input type="text" name="topic[keyword]" disabled="disabled" value="{{= typeof topic.keyword!='undefined' ? topic.keyword : ''}}" class="form-control" placeholder="关键词,使用英文逗号隔开,数量建议不要超过3">
+		                            </div>
+		                         </div>
+		                         <div class="form-group">
+		                            <label class="control-label col-md-2">描述<span class="required">*</span></label>
+		                            <div class="col-md-5">
+			                            <input type="text" name="topic[description]" disabled="disabled" value="{{= typeof topic.description!='undefined' ? topic.description : ''}}" class="form-control required" placeholder="描述">
+		                            </div>
+		                         </div>
+		                         <div class="form-group">
+		                            <label class="control-label col-md-2">缩略图描述<span class="required">*</span></label>
+		                            <div class="col-md-5">
+			                            <input type="text" name="topic[imgalt]" disabled="disabled" value="{{= typeof topic.imgalt!='undefined' ? topic.imgalt: ''}}" class="form-control required" placeholder="缩略图描述">
+		                            </div>
+		                         </div>
+		                         <div class="form-group">
+		                            <label class="control-label col-md-2">封面图片<span class="required">*</span></label>
+		                            <div class="col-md-4">
+			                           <img alt="" src="{{= topic.img }}" style="width: 260px; height: 200px;">
+		                            </div>
+		                         </div>
+			                     <div class="form-group">
+									<label class="control-label col-md-2">内容<span class="required">*</span></label>
+									<div class="col-md-8 well">
+										{{- typeof topic.content!='undefined' ? topic.content : ''}}
+									</div>
+								</div>
+
+							</div>
+							<div class="form-actions fluid">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="col-md-offset-8 col-md-2">
+											<button type="button" onclick="historyGoBack(-1);" class="btn default">返回</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+						<!-- END FORM-->                
+					</div>
+				</div>
+			</div>
+			<!-- END PAGE CONTENT-->
+		</div>
+		<!-- END PAGE -->
+	</div>
+	<!-- END CONTAINER -->
+	{{ include ./include/footer.html }}
+	<script type="text/javascript">var _NAVID = '32';</script>
+	{{ include ./include/scripts.html }}
+	<script>
+		jQuery(document).ready(function() {       
+		   App.init();
+		   zeroApp.init();
+		});
+	</script>
+</body>
+<!-- END BODY -->
+</html>

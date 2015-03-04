@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="zh-CN" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="zh-CN" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!--> <html lang="zh-CN" class="no-js"> <!--<![endif]-->
+<head>
+	{{ include ./include/head.html }}
+	<link rel="stylesheet" type="text/css" href="../../assets/resources/metronic_admin/plugins/bootstrap-fileupload/bootstrap-fileupload.css" />
+</head>
+<body class="page-header-fixed page-sidebar-fixed page-footer-fixed ">
+	{{ include ./include/header.html }}
+	<div class="page-container">
+		{{ include ./include/body-left.html }}
+		<div class="page-content">
+			<!-- BEGIN PAGE HEADER-->
+			<div class="row">
+				<div class="col-md-12">
+					<!-- BEGIN PAGE TITLE & BREADCRUMB-->			
+					<h3 class="page-title">
+						{{= ins.name }}管理--添加
+					</h3>
+					<ul class="page-breadcrumb breadcrumb">
+						<li>
+							<i class="fa fa-home"></i>
+							<a href="/admin">首页</a> 
+							<i class="fa fa-angle-right"></i>
+						</li>
+						<li>
+							<a href="/admin/instanceList/{{= topic.category }}">{{= ins.name }}管理</a>
+							<i class="fa fa-angle-right"></i>
+						</li>
+						<li>添加</li>
+					</ul>
+					<!-- END PAGE TITLE & BREADCRUMB-->
+				</div>
+			</div>
+			<!-- END PAGE HEADER-->
+			<!-- BEGIN PAGE CONTENT-->
+			<div class="tab-pane ">
+				<div class="portlet box green">
+					<div class="portlet-title">
+						<div class="caption"><i class="fa fa-reorder"></i>{{= ins.name }}添加</div>
+						<div class="tools">
+							<a href="javascript:;" class="collapse"></a>
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<!-- BEGIN FORM-->
+						<form id="instanceEditForm" enctype="multipart/form-data" method="post" action="/admin/instanceEdit/{{= topic.category }}" class="form-horizontal">
+							<div class="form-body">
+								 <input type="hidden" name="topic[_id]" value="{{= typeof topic._id!='undefined' ? topic._id : '' }}">
+		                         <div class="form-group">
+		                            <label class="control-label col-md-2">标题<span class="required">*</span></label>
+		                            <div class="col-md-5">
+			                            <input type="text" name="topic[title]" value="{{= typeof topic.title!='undefined' ? topic.title : ''}}" class="form-control required" placeholder="标题">
+		                            </div>
+		                         </div>
+			                     <div class="form-group">
+		                            <label class="control-label col-md-2">关键词<span class="required">*</span></label>
+		                            <div class="col-md-5">
+			                            <input type="text" name="topic[keyword]" value="{{= typeof topic.keyword!='undefined' ? topic.keyword : ''}}" class="form-control required" placeholder="关键词,使用英文逗号隔开,数量建议不要超过3">
+		                            </div>
+		                         </div>
+		                         <div class="form-group">
+		                            <label class="control-label col-md-2">描述<span class="required">*</span></label>
+		                            <div class="col-md-5">
+			                            <input type="text" name="topic[description]" value="{{= typeof topic.description!='undefined' ? topic.description : ''}}" class="form-control required" placeholder="描述">
+		                            </div>
+		                         </div>
+		                         <div class="form-group">
+		                            <label class="control-label col-md-2">缩略图描述<span class="required">*</span></label>
+		                            <div class="col-md-5">
+			                            <input type="text" name="topic[imgalt]" value="{{= typeof topic.imgalt!='undefined' ? topic.imgalt: ''}}" class="form-control required" placeholder="缩略图描述">
+		                            </div>
+		                         </div>
+		                         <div class="form-group">
+		                            <label class="control-label col-md-2">封面图片<span class="required">*</span></label>
+		                            <div class="col-md-6">
+										<div class="fileupload fileupload-new" data-provides="fileupload">
+											<div class="fileupload-new thumbnail" style="width: 260px; height: 200px;">
+												<img src="{{= typeof topic.img!='undefined' ? topic.img : '/assets/img/206-200-NO_IMG.gif'}}" style="width:260px;height:200px;" alt="" />
+												<input type='hidden' name="topic[img]" value="{{= typeof topic.img!='undefined' ? topic.img : '/assets/img/206-200-NO_IMG.gif'}}">
+											</div>
+											<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 260px; max-height: 200px; line-height: 20px;"></div>
+											<div>
+												<span class="btn default btn-file">
+												<span class="fileupload-new"><i class="fa fa-paper-clip"></i> 选择图片</span>
+												<span class="fileupload-exists"><i class="fa fa-undo"></i> 修改</span>
+												<input type="file" name="img" class="default" />
+												</span>
+												<a href="#" class="btn red fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
+											</div>
+										</div>
+										<span class="label label-danger">提示</span>
+										<span>请使用如下浏览器:Firefox, Chrome, Opera, Safari,建议尺寸:260px*200px.</span>
+		                            </div>
+		                         </div>
+			                     <div class="form-group">
+									<label class="control-label col-md-2">内容<span class="required">*</span></label>
+									<div class="col-md-8">
+										<textarea id="ckeditor1" class="ckeditor form-control" name="topic[content]" rows="6" data-error-container="#editor1_error">{{= typeof topic.content!='undefined' ? topic.content : ''}}</textarea>
+										<div id="editor1_error"></div>
+									</div>
+								</div>
+
+							</div>
+							<div class="form-actions fluid">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="col-md-offset-8 col-md-2">
+											<button type="submit" class="btn green">提交</button>
+											<button type="button" onclick="historyGoBack(-1);" class="btn default">返回</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+						<!-- END FORM-->                
+					</div>
+				</div>
+			</div>
+			<!-- END PAGE CONTENT-->
+		</div>
+		<!-- END PAGE -->
+	</div>
+	<!-- END CONTAINER -->
+	{{ include ./include/footer.html }}
+	<script type="text/javascript">var _NAVID = '{{= ins.navID_edit }}';</script>
+	{{ include ./include/scripts.html }}
+	<script type="text/javascript" src="/assets/resources/metronic_admin/plugins/ckeditor/ckeditor.js"></script>
+	<script type="text/javascript" src="/assets/resources/metronic_admin/plugins/bootstrap-fileupload/bootstrap-fileupload.js"></script>
+	<script>
+		jQuery(document).ready(function() {       
+		   App.init();
+		   zeroApp.init();
+		});
+		CKEDITOR.replace( "ckeditor1", {
+			allowedContent: true,
+			height: '500px'
+		});
+		zeroValidation({
+			form : 'instanceEditForm',
+			onsubmit : true,
+			rules: {
+				'topic[content]' : {
+					required : function(textarea) {
+						CKEDITOR.instances[textarea.id].updateElement(); // update textarea
+						var editorcontent = textarea.value.replace(/<[^>]*>/gi, ''); // strip tags
+						return editorcontent.length === 0;
+					}
+				}
+			}
+		});
+	</script>
+</body>
+<!-- END BODY -->
+</html>

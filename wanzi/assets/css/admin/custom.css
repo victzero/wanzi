@@ -1,0 +1,20 @@
+body {
+	font-family: "雅黑", "Microsoft YaHei", "宋体", 'Open Sans', sans-serif;
+}
+
+.navbar-brand {
+	float: left;
+	padding: 4px 15px;
+	font-size: 18px;
+	line-height: 20px;
+}
+
+.flip-pagination>ul>li {
+	cursor: pointer;
+}
+
+.flip-pagination>span {
+	top: -22px;
+	position: relative;
+	padding-left: 10px;
+}

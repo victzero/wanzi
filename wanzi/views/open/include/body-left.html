@@ -1,0 +1,64 @@
+				<div class="col-md-3">
+	                <div class="tab-style-1 margin-bottom-20">
+	                    <ul class="nav nav-tabs">
+	                        <li class="active"><a >护栏分类</a></li>
+	                    </ul>
+	                    <div class="tab-content">
+	                        <div class="tab-pane row fade in active" >
+								<ul class="nav sidebar-categories font-size-14 margin-bottom-40">
+									{{ cates.forEach(function(obj, index){ }}
+										<li><a href="/list/{{= obj.pathname }}">{{= obj.title }}</a></li>
+									{{ }); }}
+									<!-- <li><a href="#">围墙护栏栅栏</a></li>
+									<li><a href="#">4620型号</a></li>
+									<li><a href="#">7025型号</a></li>
+									<li><a href="#">7622型号</a></li>
+									<li><a href="#">其他型号</a></li> -->
+								</ul>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="tab-style-1 margin-bottom-20">
+	                    <ul class="nav nav-tabs">
+	                        <li class="active"><a >业内新闻</a></li>
+	                    </ul>
+	                    <div class="tab-content">
+	                        <div class="tab-pane row fade in active" >
+	                        	<ul class="nav sidebar-news margin-bottom-40">
+	                        		{{ news.forEach(function(obj, index){ }}
+										<li><a href="/topicDetail/xinwen/{{= obj._id }}">{{= fmt.format(obj.modifyTime, 'yyyy-MM-dd') }}&nbsp;{{= obj.title }}</a></li>
+									{{ }); }}
+								</ul>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="tab-style-1 margin-bottom-20">
+	                    <ul class="nav nav-tabs">
+	                        <li class="active"><a >联系我们</a></li>
+	                    </ul>
+	                    <div class="tab-content">
+	                        <div class="tab-pane row fade in active" >
+	                        	<address class="company-address">
+									<strong>苏州科盛护栏</strong><br />
+									厂址：苏州太仓市双凤镇<br />
+									服务电话：4000-128-993<br/>13962406197&nbsp;&nbsp;13052844773<br />
+									淘宝：<a href="http://shop34174453.taobao.com" target="_blank">shop34174453.taobao.com</a><br />
+									<a href="http://shop34838227.taobao.com/" target="_blank">shop34838227.taobao.com</a><br />
+									官网：<a href="http://www.keshenghl.com" target="_blank">www.keshenghl.com</a><br />
+									传真：0512-53214636<br />
+									QQ：517446351<br />
+									联系人:杨经理
+								</address>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="tab-style-1 margin-bottom-20">
+	                    <a href="http://www.keshenghl.com/"><img alt="" src="../../assets/img/open/112233.jpg" class="img-responsive"></a>
+	                </div>
+	                <div class="tab-style-1 margin-bottom-20">
+	                    <a target="_blank" href="http://www.taobao.com/webww/ww.php?ver=3&touid=阿芳yf&siteid=cntaobao&status=1&charset=utf-8"><img alt="" src="../../assets/img/open/consulting-wangwang.jpg" class="img-responsive"></a>
+	                </div>
+	                <div class="tab-style-1 margin-bottom-20">
+	                    <a href="tencent://message/?uin=517446351&amp;Menu=yes"><img alt="" src="../../assets/img/open/consulting-qq.jpg" class="img-responsive"></a>
+	                </div>
+                </div>

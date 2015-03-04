@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="zh-CN" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="zh-CN" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!--> <html lang="zh-CN" class="no-js"> <!--<![endif]-->
+<head>
+	{{ include ./include/head.html }}
+	<link rel="stylesheet" type="text/css" href="../../assets/resources/metronic_admin/plugins/bootstrap-fileupload/bootstrap-fileupload.css" />
+</head>
+<body class="page-header-fixed page-sidebar-fixed page-footer-fixed ">
+	{{ include ./include/header.html }}
+	<div class="page-container">
+		{{ include ./include/body-left.html }}
+		<div class="page-content">
+			<!-- BEGIN PAGE HEADER-->
+			<div class="row">
+				<div class="col-md-12">
+					<!-- BEGIN PAGE TITLE & BREADCRUMB-->			
+					<h3 class="page-title">
+						{{= cons.name }}管理--添加
+					</h3>
+					<ul class="page-breadcrumb breadcrumb">
+						<li>
+							<i class="fa fa-home"></i>
+							<a href="/admin">首页</a> 
+							<i class="fa fa-angle-right"></i>
+						</li>
+						<li>
+							<a href="/admin/cateList">{{= cons.name }}管理</a>
+							<i class="fa fa-angle-right"></i>
+						</li>
+						<li>添加</li>
+					</ul>
+					<!-- END PAGE TITLE & BREADCRUMB-->
+				</div>
+			</div>
+			<!-- END PAGE HEADER-->
+			<!-- BEGIN PAGE CONTENT-->
+			<div class="tab-pane ">
+				<div class="portlet box green">
+					<div class="portlet-title">
+						<div class="caption"><i class="fa fa-reorder"></i>{{= cons.name }}添加</div>
+						<div class="tools">
+							<a href="javascript:;" class="collapse"></a>
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<!-- BEGIN FORM-->
+						<form id="cateEditForm" enctype="multipart/form-data" method="post" action="/admin/cateEdit" class="form-horizontal">
+							<div class="form-body">
+								 <input type="hidden" name="obj[_id]" value="{{= typeof obj._id!='undefined' ? obj._id : '' }}">
+		                         <div class="form-group">
+		                            <label class="control-label col-md-2">类别名称<span class="required">*</span></label>
+		                            <div class="col-md-5">
+			                            <input type="text" name="obj[title]" value="{{= typeof obj.title!='undefined' ? obj.title : ''}}" class="form-control required" placeholder="类别名称">
+		                            </div>
+		                         </div>
+		                         <div class="form-group">
+		                            <label class="control-label col-md-2">地址段<span class="required">*</span></label>
+		                            <div class="col-md-5">
+			                            <input type="text" name="obj[pathname]" {{= typeof obj._id!='undefined' ? 'disabled' : '' }} value="{{= typeof obj.pathname!='undefined' ? obj.pathname : ''}}" class="form-control required" placeholder="用作访问地址空间,建议使用拼音,提高seo优化,只可包含字母和数字.不可修改">
+		                            </div>
+		                         </div>
+			                     <div class="form-group">
+		                            <label class="control-label col-md-2">关键词<span class="required">*</span></label>
+		                            <div class="col-md-5">
+			                            <input type="text" name="obj[keyword]" value="{{= typeof obj.keyword!='undefined' ? obj.keyword : ''}}" class="form-control required" placeholder="关键词,使用英文逗号隔开,数量建议不要超过3">
+		                            </div>
+		                         </div>
+							</div>
+							<div class="form-actions fluid">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="col-md-offset-8 col-md-2">
+											<button type="submit" class="btn green">提交</button>
+											<button type="button" onclick="historyGoBack(-1);" class="btn default">返回</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+						<!-- END FORM-->                
+					</div>
+				</div>
+			</div>
+			<!-- END PAGE CONTENT-->
+		</div>
+		<!-- END PAGE -->
+	</div>
+	<!-- END CONTAINER -->
+	{{ include ./include/footer.html }}
+	<script type="text/javascript">var _NAVID = '{{= cons.navID_edit }}';</script>
+	{{ include ./include/scripts.html }}
+	<script type="text/javascript" src="/assets/resources/metronic_admin/plugins/ckeditor/ckeditor.js"></script>
+	<script type="text/javascript" src="/assets/resources/metronic_admin/plugins/bootstrap-fileupload/bootstrap-fileupload.js"></script>
+	<script>
+		jQuery(document).ready(function() {       
+		   App.init();
+		   zeroApp.init();
+		});
+		zeroValidation({
+			form : 'cateEditForm',
+			onsubmit : true,
+		});
+	</script>
+</body>
+<!-- END BODY -->
+</html>

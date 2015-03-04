@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="zh-CN" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="zh-CN" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!--> <html lang="zh-CN" class="no-js"> <!--<![endif]-->
+<head>
+	{{ include ./include/head.html }}
+	<link rel="stylesheet" type="text/css" href="../../assets/resources/metronic_admin/plugins/bootstrap-fileupload/bootstrap-fileupload.css" />
+</head>
+<body class="page-header-fixed page-sidebar-fixed page-footer-fixed ">
+	{{ include ./include/header.html }}
+	<div class="page-container">
+		{{ include ./include/body-left.html }}
+		<div class="page-content">
+			<!-- BEGIN PAGE HEADER-->
+			<div class="row">
+				<div class="col-md-12">
+					<!-- BEGIN PAGE TITLE & BREADCRUMB-->			
+					<h3 class="page-title">
+						{{= title }}
+					</h3>
+					<ul class="page-breadcrumb breadcrumb">
+						<li>
+							<i class="fa fa-home"></i>
+							<a href="/admin">首页</a> 
+							<i class="fa fa-angle-right"></i>
+						</li>
+						<li>
+							<a href="/admin">滚动图管理</a>
+							<i class="fa fa-angle-right"></i>
+						</li>
+						<li>添加</li>
+					</ul>
+					<!-- END PAGE TITLE & BREADCRUMB-->
+				</div>
+			</div>
+			<!-- END PAGE HEADER-->
+			<!-- BEGIN PAGE CONTENT-->
+			<div class="tab-pane ">
+				<div class="portlet box green">
+					<div class="portlet-title">
+						<div class="caption"><i class="fa fa-reorder"></i>滚动图添加</div>
+						<div class="tools">
+							<a href="javascript:;" class="collapse"></a>
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<!-- BEGIN FORM-->
+						<form id="homeimgEditForm" enctype="multipart/form-data" method="post" action="/admin/homeimgEdit" class="form-horizontal">
+							<div class="form-body">
+								 <input type="hidden" name="topic[_id]" value="{{= typeof topic._id!='undefined' ? topic._id : '' }}">
+		                         <div class="form-group">
+		                            <label class="control-label col-md-2">描述信息<span class="required">*</span></label>
+		                            <div class="col-md-5">
+			                            <input type="text" name="topic[title]" value="{{= typeof topic.title!='undefined' ? topic.title : ''}}" class="form-control required" placeholder="描述信息,提高SEO优化">
+		                            </div>
+		                         </div>
+			                     <div class="form-group">
+		                            <label class="control-label col-md-2">关键词<span class="required">*</span></label>
+		                            <div class="col-md-5">
+			                            <input type="text" name="topic[keyword]" value="{{= typeof topic.keyword!='undefined' ? topic.keyword : ''}}" class="form-control required" placeholder="关键词,使用英文逗号隔开,数量建议不要超过3">
+		                            </div>
+		                         </div>
+		                         <div class="form-group">
+		                            <label class="control-label col-md-2">缩略图描述<span class="required">*</span></label>
+		                            <div class="col-md-5">
+			                            <input type="text" name="topic[imgalt]" value="{{= typeof topic.imgalt!='undefined' ? topic.imgalt: ''}}" class="form-control required" placeholder="缩略图描述">
+		                            </div>
+		                         </div>
+		                         <div class="form-group">
+		                            <label class="control-label col-md-2">封面图片<span class="required">*</span></label>
+		                            <div class="col-md-6">
+										<div class="fileupload fileupload-new" data-provides="fileupload">
+											<div class="fileupload-new thumbnail" style="width: 260px; height: 200px;">
+												<img src="{{= typeof topic.img!='undefined' ? topic.img : '/assets/img/206-200-NO_IMG.gif'}}" style="width:260px;height:200px;" alt="" />
+												<input type='hidden' name="topic[img]" value="{{= typeof topic.img!='undefined' ? topic.img : '/assets/img/206-200-NO_IMG.gif'}}">
+											</div>
+											<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 260px; max-height: 200px; line-height: 20px;"></div>
+											<div>
+												<span class="btn default btn-file">
+												<span class="fileupload-new"><i class="fa fa-paper-clip"></i> 选择图片</span>
+												<span class="fileupload-exists"><i class="fa fa-undo"></i> 修改</span>
+												<input type="file" name="img" class="default" />
+												</span>
+												<a href="#" class="btn red fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
+											</div>
+										</div>
+										<span class="label label-danger">提示</span>
+										<span>请使用如下浏览器:Firefox, Chrome, Opera, Safari,建议尺寸:1170px*400px.必须确保所有上传图片高度完全相同.</span>
+		                            </div>
+		                         </div>
+							</div>
+							<div class="form-actions fluid">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="col-md-offset-8 col-md-2">
+											<button type="submit" class="btn green">提交</button>
+											<button type="button" onclick="historyGoBack(-1);" class="btn default">返回</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+						<!-- END FORM-->                
+					</div>
+				</div>
+			</div>
+			<!-- END PAGE CONTENT-->
+		</div>
+		<!-- END PAGE -->
+	</div>
+	<!-- END CONTAINER -->
+	{{ include ./include/footer.html }}
+	<script type="text/javascript">var _NAVID = '1';</script>
+	{{ include ./include/scripts.html }}
+	<script type="text/javascript" src="/assets/resources/metronic_admin/plugins/ckeditor/ckeditor.js"></script>
+	<script type="text/javascript" src="/assets/resources/metronic_admin/plugins/bootstrap-fileupload/bootstrap-fileupload.js"></script>
+	<script>
+		jQuery(document).ready(function() {       
+		   App.init();
+		   zeroApp.init();
+		});
+		zeroValidation({
+			form : 'homeimgEditForm',
+			onsubmit : true,
+		});
+	</script>
+</body>
+<!-- END BODY -->
+</html>
