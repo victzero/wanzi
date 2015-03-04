@@ -7,6 +7,6 @@
   },
   "dependencies": {
     "express": "3.2.6",
-    "ejs": "*"
+    "ndir": "0.1.5"
   }
 }

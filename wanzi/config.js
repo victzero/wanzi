@@ -20,9 +20,9 @@ var config = {
 	upload_temp_dir : path.join(__dirname, 'assets', 'user_data', 'temp'),
 	no_img : path.join(__dirname, 'assets', 'img', '206-200-NO_IMG.gif'),
 
-	db : 'mongodb://115.29.226.180/kesheng',
-	dbUser : 'keshengdb',
-	dbPass : 'Keshengdb2014',
+	db : 'mongodb://112.126.64.155:27017/wanzi',
+	dbUser : '',
+	dbPass : '',
 	session_secret : 'zero_app',
 
 	// error

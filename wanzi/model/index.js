@@ -5,8 +5,11 @@ var options = {
 	server : {
 		poolSize : 5
 	},
-	user : config.dbUser,
-	pass : config.dbPass
+	auth: {
+		user : config.dbUser,
+		pass : config.dbPass
+	}
+	
 }
 
 mongoose.connect(config.db, options, function(err) {
