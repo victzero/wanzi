@@ -5,6 +5,7 @@ var login = require('./controllers/admin/login');
 var instance = require('./controllers/admin/instance');
 var cate = require('./controllers/admin/cate');
 var section = require('./controllers/admin/section');
+var fetchData = require('./controllers/admin/fetchData')
 var file = require('./controllers/admin/file');
 var config = require('./config');
 
@@ -68,6 +69,11 @@ module.exports = function(app) {
 	});
 	app.get('/admin/sectionRemove/*', function(req, res) {
 		routeSplit(req, res, section.remove, true);
+	});
+
+	//数据抓取.
+	app.get('/admin/fetchData/jimuBox', function(req, res){
+		fetchData.jimubox_list(req,res);
 	});
 
 	// 文件上传
