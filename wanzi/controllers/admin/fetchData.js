@@ -40,5 +40,8 @@ exports.jimubox_list = function(req, res) {
 			filter : filter.init()
 		});
 	});
+}
+
+exports.jimubox_update = function(req, res){
 	
 }

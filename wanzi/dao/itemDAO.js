@@ -35,7 +35,7 @@ exports.flip = function(filter, callback) {
 	}
 	query.category = filter.category;
 	//查询列表信息.
-	Item.find(query, '_id title status img imgalt modifyTime', options, function(err, docs) {
+	Item.find(query, '_id title status iterestRate duration amount modifyTime', options, function(err, docs) {
 		if (err) {
 			return callback(err);
 		}
@@ -50,11 +50,10 @@ exports.flip = function(filter, callback) {
 exports.newAndSave = function(temp, callback){
 	var item = new Item();
 	item.title = temp.title;
-	item.keyword = temp.keyword;
-	item.img = temp.img;
-	item.category = temp.category;
-	item.content = temp.content;
-	item.realpath = temp.realpath;
+	item.status = temp.status;
+	item.iterestRate = temp.iterestRate;
+	item.duration = temp.duration;
+	item.amount = temp.amount;
 	item.save(callback);
 };
 

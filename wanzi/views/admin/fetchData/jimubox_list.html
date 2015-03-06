@@ -41,6 +41,41 @@
 			<div class="tab-pane ">
 				<div class="portlet box green">
 					<div class="portlet-title">
+						<div class="caption"><i class="fa fa-reorder"></i>操作</div>
+						<div class="tools">
+							<a href="javascript:;" class="collapse"></a>
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<!-- BEGIN FORM-->
+						<form enctype="multipart/form-data" method="post" action="/admin/instanceEdit/{{= locals.category }}" class="form-horizontal">
+							<div class="form-body">
+								 <input type="hidden" name="id" value="${obj.id }">
+								 <div class="form-group">
+		                            <label class="control-label col-md-2">更新网址<span class="required">*</span></label>
+		                            <div class="col-md-4">
+			                            <input type="text" name="url" disabled="disabled" value="" class="form-control">
+		                            </div>
+		                         </div>
+							</div>
+							<div class="form-actions fluid">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="col-md-offset-2 col-md-2">
+											<button type="button" onclick="historyGoBack(-1);" class="btn blue">立即更新</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+						<!-- END FORM-->                
+					</div>
+				</div>
+			</div>
+			<!-- END PAGE CONTENT-->
+			<div class="tab-pane ">
+				<div class="portlet box green">
+					<div class="portlet-title">
 						<div class="caption"><i class="fa fa-reorder"></i>{{= cons.name }}查询</div>
 						<div class="tools">
 							<a href="javascript:;" class="collapse"></a>
@@ -94,7 +129,10 @@
 										<tr>
 											<th scope="col" style="width: 50px;" >序号</th>
 											<th scope="col" >标题</th>
-											<th scope="col" style="width: 150px;" >封面缩略图</th>
+											<th scope="col" >状态</th>
+											<th scope="col" >年化利率</th>
+											<th scope="col" >持续时间</th>
+											<th scope="col" >融资金额</th>
 											<th scope="col" >更新时间</th>
 											<th scope="col" >操作</th>
 										</tr>
@@ -104,7 +142,10 @@
 											<tr>
 												<td>{{= (filter.pageNo-1) * filter.pageSize + index + 1 }}</td>
 												<td>{{= obj.title }}</td>
-												<td><img alt="" src="{{= obj.img }}" style="width: 130px; height: 100px;" class="img-responsive"></td>
+												<td>{{= obj.status }}</td>
+												<td>{{= obj.iterestRate }}</td>
+												<td>{{= obj.duration }}</td>
+												<td>{{= obj.amount }}</td>
 												<td>{{= fmt.format_date(obj.modifyTime) }}</td>
 												<td>
 													<a href="/admin/sectionDetail/{{= locals.category }}?id={{= obj._id }}">详细</a>&nbsp;&nbsp;&nbsp;
