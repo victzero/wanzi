@@ -22,7 +22,9 @@ mongoose.connect(config.db, options, function(err) {
 require('./user');
 require('./topic');
 require('./cate');
+require('./item');
 
 exports.User = mongoose.model('USER');
 exports.Topic = mongoose.model('TOPIC');
 exports.Cate = mongoose.model('CATE');
+exports.Item = mongoose.model('ITEM');
