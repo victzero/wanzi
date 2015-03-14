@@ -23,8 +23,10 @@ require('./user');
 require('./topic');
 require('./cate');
 require('./item');
+require('./fetch/tactics');
 
 exports.User = mongoose.model('USER');
 exports.Topic = mongoose.model('TOPIC');
 exports.Cate = mongoose.model('CATE');
 exports.Item = mongoose.model('ITEM');
+exports.Tactics = mongoose.model('TACTICS');
