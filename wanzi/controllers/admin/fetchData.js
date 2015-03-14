@@ -8,7 +8,13 @@ var FlipFilter = require('zero').FlipFilter;
 var extend = require('zero').extend;
 
 var rootCate = {
-	navID_jimubox : '61',
+	navID_jimubox: '61',
+	navID_tactics: '62',
+}
+
+//各个网站抓取策略查看页面.
+exports.tactics = function(req, res){
+
 }
 
 /**
@@ -26,22 +32,22 @@ exports.jimubox_list = function(req, res) {
 		if (err) {
 			throw err;
 		}
-		
+
 		var cons = {
-				name: '积木盒子'
+			name: '积木盒子'
 		};
 		extend(cons, rootCate);
 		res.render('admin/fetchData/jimubox_list', {
-			title : '管理',
-			list : list,
-			fmt : fmt,
-			s_title : stitle,
-			cons : cons,
-			filter : filter.init()
+			title: '管理',
+			list: list,
+			fmt: fmt,
+			s_title: stitle,
+			cons: cons,
+			filter: filter.init()
 		});
 	});
 }
 
-exports.jimubox_update = function(req, res){
-	
+exports.jimubox_update = function(req, res) {
+
 }
