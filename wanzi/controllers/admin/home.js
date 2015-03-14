@@ -17,7 +17,7 @@ exports.index = function(req, res) {
 			throw err;
 		}
 		res.render('admin/index', {
-			title : '欢迎来到科盛护栏控制台',
+			title : '欢迎来到信息发布系统控制台',
 			topics : topics,
 			fmt : fmt,
 			filter : filter.init()

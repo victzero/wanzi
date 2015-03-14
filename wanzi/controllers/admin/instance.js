@@ -7,17 +7,17 @@ var FlipFilter = require('zero').FlipFilter;
 
 var constants = {
 	type : {
-		name : '型号展示',
+		name : '普通新闻1',
 		navID_list : '51',
 		navID_edit : '52',
 	},
 	chanpin : {
-		name : '产品实例',
+		name : '普通新闻2',
 		navID_list : '31',
 		navID_edit : '32',
 	},
 	xinwen : {
-		name : '业内新闻',
+		name : '普通新闻3',
 		navID_list : '41',
 		navID_edit : '42',
 	}
