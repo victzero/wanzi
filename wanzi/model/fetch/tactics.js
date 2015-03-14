@@ -13,6 +13,7 @@ var TacticsSchema = new Schema({
 		index : true
 	},
 	reg : String,
+	inusing : { type : Boolean, default: true } ,
 	createTime : { type : Date, default: Date.now } ,
 	modifyTime : { type : Date, default: Date.now } ,
 });
