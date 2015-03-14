@@ -1,4 +1,4 @@
-var model = require('../model');
+var model = require('../../model');
 var Tactics = model.Tactics;
 
 exports.getTacticsById = function(id, callback) {

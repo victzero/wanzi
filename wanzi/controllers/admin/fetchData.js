@@ -3,6 +3,7 @@ var path = require('path');
 var sys = require('sys');
 var config = require('../../config');
 var itemDAO = require('../../dao').ItemDAO;
+var tacticsDAO = require('../../dao').TacticsDAO;
 var fmt = require('zero').fmt;
 var FlipFilter = require('zero').FlipFilter;
 var extend = require('zero').extend;
@@ -13,8 +14,25 @@ var rootCate = {
 }
 
 //各个网站抓取策略查看页面.
-exports.tactics = function(req, res){
+exports.tacticsList = function(req, res) {
+	var filter = new FlipFilter(req.body.filter);
 
+	tacticsDAO.flip(filter, function(err, list) {
+		if (err) {
+			throw err;
+		}
+		var cons = {
+			name: '策略信息'
+		}
+		extend(cons, rootCate);
+		res.render('admin/fetchData/tactics_list', {
+			title: '策略信息',
+			list: list,
+			fmt: fmt,
+			cons: cons,
+			filter: filter.init()
+		});
+	})
 }
 
 /**
