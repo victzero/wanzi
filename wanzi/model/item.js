@@ -19,6 +19,7 @@ var ItemSchema = new Schema({
 	iterestRate : String,//年化利率
 	duration : String,//持续时间
 	amount : String,//融资金额
+	urlAddress : String,//抓取网址
 	createTime : { type : Date, default: Date.now } ,
 	modifyTime : { type : Date, default: Date.now } ,
 });

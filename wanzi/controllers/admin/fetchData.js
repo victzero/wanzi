@@ -4,6 +4,8 @@ var sys = require('sys');
 var config = require('../../config');
 var itemDAO = require('../../dao').ItemDAO;
 var tacticsDAO = require('../../dao').TacticsDAO;
+var fetchService = require('../../service/fetchData/jimuBox');
+
 var fmt = require('zero').fmt;
 var FlipFilter = require('zero').FlipFilter;
 var extend = require('zero').extend;
@@ -67,5 +69,6 @@ exports.jimubox_list = function(req, res) {
 }
 
 exports.jimubox_update = function(req, res) {
-
+	fetchService.updateList();
+	res.redirect('/admin/fetchData/jimuBox');
 }

@@ -106,6 +106,7 @@ var processIndex = function(index, urlAddress) {
 				temp.amount = match[1] + match[2];
 				console.log("融资金额" + match[1] + match[2]);
 			}
+			temp.urlAddress = urlAddress;
 			itemDAO.newAndSave(temp);
 		});
 

@@ -75,6 +75,9 @@ module.exports = function(app) {
 	app.get('/admin/fetchData/jimuBox', function(req, res){
 		fetchData.jimubox_list(req,res);
 	});
+	app.get('/admin/fetchData/jimubox_update', function(req, res){
+		fetchData.jimubox_update(req,res);
+	});
 	app.get('/admin/fetchData/tacticsList', function(req, res){
 		fetchData.tacticsList(req,res);
 	});

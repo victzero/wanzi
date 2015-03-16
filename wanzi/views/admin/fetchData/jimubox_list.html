@@ -54,7 +54,7 @@
 								 <div class="form-group">
 		                            <label class="control-label col-md-2">更新网址<span class="required">*</span></label>
 		                            <div class="col-md-4">
-			                            <input type="text" name="url" disabled="disabled" value="" class="form-control">
+			                            <input type="text" name="url" disabled="disabled" value="www.jimubox.com/Project/List?status=1" class="form-control">
 		                            </div>
 		                         </div>
 							</div>
@@ -62,7 +62,7 @@
 								<div class="row">
 									<div class="col-md-12">
 										<div class="col-md-offset-2 col-md-2">
-											<button type="button" onclick="historyGoBack(-1);" class="btn blue">立即更新</button>
+											<button type="button" onclick="location.href='./jimubox_update';" class="btn blue">立即更新</button>
 										</div>
 									</div>
 								</div>
@@ -141,7 +141,7 @@
 										{{ list.forEach(function(obj, index){ }}
 											<tr>
 												<td>{{= (filter.pageNo-1) * filter.pageSize + index + 1 }}</td>
-												<td>{{= obj.title }}</td>
+												<td><a href='http://www.jimubox.com{{= obj.urlAddress}}' target="_blank">{{= obj.title }}</a></td>
 												<td>{{= obj.status }}</td>
 												<td>{{= obj.iterestRate }}</td>
 												<td>{{= obj.duration }}</td>

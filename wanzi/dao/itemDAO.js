@@ -7,6 +7,12 @@ exports.getItemByName = function(title, callback) {
 	}, callback);
 }
 
+exports.getItemByURL = getItemByURL = function(urlAddress, callback) {
+	Item.findOne({
+		'urlAddress' : urlAddress
+	}, callback);
+}
+
 exports.getItemById = function(id, callback) {
 	Item.findOne({
 		_id : id
@@ -35,7 +41,7 @@ exports.flip = function(filter, callback) {
 	}
 	query.category = filter.category;
 	//查询列表信息.
-	Item.find(query, '_id title status iterestRate duration amount modifyTime', options, function(err, docs) {
+	Item.find(query, '_id title status iterestRate duration amount urlAddress modifyTime', options, function(err, docs) {
 		if (err) {
 			return callback(err);
 		}
@@ -48,13 +54,24 @@ exports.flip = function(filter, callback) {
 }
 
 exports.newAndSave = function(temp, callback){
-	var item = new Item();
-	item.title = temp.title;
-	item.status = temp.status;
-	item.iterestRate = temp.iterestRate;
-	item.duration = temp.duration;
-	item.amount = temp.amount;
-	item.save(callback);
+	getItemByURL(temp.urlAddress, function(err, item){
+		if (err) {
+			return ;
+		}
+		
+		if(item){
+			return;
+		}else{
+			var item = new Item();
+			item.title = temp.title;
+			item.status = temp.status;
+			item.iterestRate = temp.iterestRate;
+			item.duration = temp.duration;
+			item.amount = temp.amount;
+			item.urlAddress = temp.urlAddress;
+			item.save(callback);
+		}
+	});
 };
 
 exports.update = function(id, item, callback) {
