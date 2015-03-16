@@ -37,6 +37,26 @@ exports.tacticsList = function(req, res) {
 	})
 }
 
+var JIMUBOX_UPDATE_INTERVAL = null;
+/**
+ * 设置积木盒子的更新策略.
+ */
+exports.jimubox_interval = function(req, res){
+	var interval = req.query['interval'];
+	if(!interval){
+		res.redirect('/admin/fetchData/jimuBox');
+	}else{
+		interval = interval * 1000;
+	}
+	if(JIMUBOX_UPDATE_INTERVAL){
+		clearInterval(JIMUBOX_UPDATE_INTERVAL)
+	}
+	JIMUBOX_UPDATE_INTERVAL = setInterval(function(){
+		fetchService.updateList();
+	}, interval);
+	res.redirect('/admin/fetchData/jimuBox');
+}
+
 /**
  * 查看所有积木盒子的数据
  */
