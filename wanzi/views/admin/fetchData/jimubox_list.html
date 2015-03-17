@@ -24,10 +24,6 @@
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							<a href="/admin/cateList">护栏分类</a>
-							<i class="fa fa-angle-right"></i>
-						</li>
-						<li>
 							<a href="/admin/sectionList/{{= locals.category }}">{{= cons.name }}管理</a>
 							<i class="fa fa-angle-right"></i>
 						</li>
@@ -60,7 +56,7 @@
 		                         <div class="form-group">
 		                            <label class="control-label col-md-2">间隔时间(秒)<span class="required">*</span></label>
 		                            <div class="col-md-4">
-			                            <input id="updateInterval" type="text" name="interval" value="5" class="form-control">
+			                            <input id="updateInterval" type="text" name="interval" value="60" class="form-control">
 		                            </div>
 		                         </div>
 							</div>
@@ -72,6 +68,42 @@
 										</div>
 										<div class="col-md-2">
 											<button type="button" onclick="location.href='./jimubox_interval?interval='+$('#updateInterval').val();" class="btn blue">定时更新</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+						<!-- END FORM-->                
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane ">
+				<div class="portlet box green">
+					<div class="portlet-title">
+						<div class="caption"><i class="fa fa-reorder"></i>详细信息更新周期设定</div>
+						<div class="tools">
+							<a href="javascript:;" class="collapse"></a>
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<!-- BEGIN FORM-->
+						<form enctype="multipart/form-data" method="post" action="/admin/instanceEdit/{{= locals.category }}" class="form-horizontal">
+							<div class="form-body">
+		                         <div class="form-group">
+		                            <label class="control-label col-md-2">间隔时间(秒)<span class="required">*</span></label>
+		                            <div class="col-md-4">
+			                            <input id="detailInterval" type="text" name="interval" value="10" class="form-control">
+		                            </div>
+		                         </div>
+							</div>
+							<div class="form-actions fluid">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="col-md-offset-2 col-md-2">
+											<button type="button" onclick="location.href='./jimubox_detail_update';" class="btn blue">立即更新</button>
+										</div>
+										<div class="col-md-2">
+											<button type="button" onclick="location.href='./jimubox_detail_interval?interval='+$('#detailInterval').val();" class="btn blue">定时更新</button>
 										</div>
 									</div>
 								</div>
