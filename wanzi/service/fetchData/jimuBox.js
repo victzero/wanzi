@@ -8,6 +8,7 @@ var locRegex = new RegExp("<h4 class=\"project-name\">(.*?)</h4>", "gi");
 var titleRegex = new RegExp("<a href=\"(.*)\" class=\"black-link\"", "gi");
 var detailRegex = new RegExp("data-html=\"true\">([\u4e00-\u9fa5]*)</span>\n(.*)</h2>", 'gi');
 var detailDescRegex = new RegExp("<p style=\"margin-bottom: 0; font-size:12px\" class=\"\">\n(.*)\n", "gi");
+var detailProgressRegex = new RegExp('value=\"([0-9]*)\"/>', "gi");
 var detailRateRegex = new RegExp("<span class=\"important\">\n(.*)</span>", "gi");
 var detailTimeRegex = new RegExp("(.*)<span class=\"unit\">([\u4e00-\u9fa5]*)</span>", "gi");
 var detailMoneyRegex = new RegExp("(.*)<span\n.*class=\"unit\">(.*)</span>", "gi");
@@ -90,10 +91,11 @@ var processIndex = function(index, urlAddress) {
 				temp.title = match[1] + match[2];
 				console.log("项目名称:" + match[1] + match[2]);
 			}
-			while (match = detailDescRegex.exec(stack)) {
-				temp.status = match[1];
-				console.log("当前状态:" + match[1]);
+			while (match = detailProgressRegex.exec(stack)) {
+				temp.progress = match[1];
+				console.log("当前进度:" + match[1]);
 			}
+//			temp.status = '投标中';
 			while (match = detailRateRegex.exec(stack)) {
 				temp.iterestRate = match[1].replace('<small>+</small>', '+') + "%";
 				console.log("年化利率:" + match[1].replace('<small>+</small>', '+') + "%");

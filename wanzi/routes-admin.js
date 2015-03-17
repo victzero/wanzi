@@ -6,6 +6,7 @@ var instance = require('./controllers/admin/instance');
 var cate = require('./controllers/admin/cate');
 var section = require('./controllers/admin/section');
 var fetchData = require('./controllers/admin/fetchData')
+var fetchTemp = require('./controllers/admin/fetch/temp')
 var file = require('./controllers/admin/file');
 var config = require('./config');
 
@@ -84,6 +85,14 @@ module.exports = function(app) {
 	app.get('/admin/fetchData/tacticsList', function(req, res){
 		fetchData.tacticsList(req,res);
 	});
+
+	//测试地址.
+	app.get('/admin/fetchData/parsePage', function(req, res){
+		fetchTemp.fetchPage(req, res);
+	})
+	app.get('/admin/fetchData/fetchURL', function(req, res){
+		fetchTemp.fetchURL(req, res);
+	})
 
 	// 文件上传
 	app.post('/admin/fileupload', file.upload);

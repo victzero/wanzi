@@ -16,6 +16,7 @@ var ItemSchema = new Schema({
 	img : String,//图片地址
 	imgalt : String,//图片描述
 	status : String,//当前状态
+	progress: String,//当前进度,百分比.
 	iterestRate : String,//年化利率
 	duration : String,//持续时间
 	amount : String,//融资金额

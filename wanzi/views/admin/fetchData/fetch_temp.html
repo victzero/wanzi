@@ -24,10 +24,6 @@
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							<a href="/admin/cateList">护栏分类</a>
-							<i class="fa fa-angle-right"></i>
-						</li>
-						<li>
 							<a href="/admin/sectionList/{{= locals.category }}">{{= cons.name }}管理</a>
 							<i class="fa fa-angle-right"></i>
 						</li>
@@ -41,26 +37,20 @@
 			<div class="tab-pane ">
 				<div class="portlet box green">
 					<div class="portlet-title">
-						<div class="caption"><i class="fa fa-reorder"></i>操作</div>
+						<div class="caption"><i class="fa fa-reorder"></i>抓取网址</div>
 						<div class="tools">
 							<a href="javascript:;" class="collapse"></a>
 						</div>
 					</div>
 					<div class="portlet-body form">
 						<!-- BEGIN FORM-->
-						<form enctype="multipart/form-data" method="post" action="/admin/instanceEdit/{{= locals.category }}" class="form-horizontal">
+						<form method="get" action="/admin/fetchData/fetchURL" class="form-horizontal">
 							<div class="form-body">
 								 <input type="hidden" name="id" value="${obj.id }">
 								 <div class="form-group">
 		                            <label class="control-label col-md-2">更新网址<span class="required">*</span></label>
 		                            <div class="col-md-4">
-			                            <input type="text" name="url" disabled="disabled" value="www.jimubox.com/Project/List?status=1" class="form-control">
-		                            </div>
-		                         </div>
-		                         <div class="form-group">
-		                            <label class="control-label col-md-2">间隔时间(秒)<span class="required">*</span></label>
-		                            <div class="col-md-4">
-			                            <input id="updateInterval" type="text" name="interval" value="5" class="form-control">
+			                            <input id="urlAddress" type="text" name="url" value="www.jimubox.com/Project/List?status=1" class="form-control">
 		                            </div>
 		                         </div>
 							</div>
@@ -68,10 +58,7 @@
 								<div class="row">
 									<div class="col-md-12">
 										<div class="col-md-offset-2 col-md-2">
-											<button type="button" onclick="location.href='./jimubox_update';" class="btn blue">立即更新</button>
-										</div>
-										<div class="col-md-2">
-											<button type="button" onclick="location.href='./jimubox_interval?interval='+$('#updateInterval').val();" class="btn blue">定时更新</button>
+											<button type="button" onclick="fetchPage();" class="btn blue">抓取</button>
 										</div>
 									</div>
 								</div>
@@ -81,11 +68,39 @@
 					</div>
 				</div>
 			</div>
-			<!-- END PAGE CONTENT-->
 			<div class="tab-pane ">
 				<div class="portlet box green">
 					<div class="portlet-title">
-						<div class="caption"><i class="fa fa-reorder"></i>{{= cons.name }}查询</div>
+						<div class="caption"><i class="fa fa-reorder"></i>结果</div>
+						<div class="tools">
+							<a href="javascript:;" class="collapse"></a>
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<!-- BEGIN FORM-->
+						<form class="form-horizontal" method="post" action="/admin/sectionList/{{= locals.category }}">
+							<div class="form-body">
+								<div class="row">
+	                               <div class="col-md-3">
+	                                  <div class="form-group">
+	                                     <label class="control-label col-md-4">网页内容</label>
+	                                     <div class="col-md-8">
+	                                     	<textarea id="pageText" rows="45" cols="180"></textarea> 
+	                                     </div>
+	                                  </div>
+	                               </div>
+	                               <!--/span-->
+	                            </div>
+							</div>
+						</form>
+						<!-- END FORM-->                
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane ">
+				<div class="portlet box green">
+					<div class="portlet-title">
+						<div class="caption"><i class="fa fa-reorder"></i>正则匹配</div>
 						<div class="tools">
 							<a href="javascript:;" class="collapse"></a>
 						</div>
@@ -138,7 +153,7 @@
 										<tr>
 											<th scope="col" style="width: 50px;" >序号</th>
 											<th scope="col" >标题</th>
-											<th scope="col" >进度</th>
+											<th scope="col" >状态</th>
 											<th scope="col" >年化利率</th>
 											<th scope="col" >持续时间</th>
 											<th scope="col" >融资金额</th>
@@ -147,29 +162,12 @@
 										</tr>
 									</thead>
 									<tbody>
-										{{ list.forEach(function(obj, index){ }}
-											<tr>
-												<td>{{= (filter.pageNo-1) * filter.pageSize + index + 1 }}</td>
-												<td><a href='http://www.jimubox.com{{= obj.urlAddress}}' target="_blank">{{= obj.title }}</a></td>
-												<td>{{= obj.progress }}</td>
-												<td>{{= obj.iterestRate }}</td>
-												<td>{{= obj.duration }}</td>
-												<td>{{= obj.amount }}</td>
-												<td>{{= fmt.format_date(obj.modifyTime) }}</td>
-												<td>
-													<a href="/admin/sectionDetail/{{= locals.category }}?id={{= obj._id }}">详细</a>&nbsp;&nbsp;&nbsp;
-													<a href="/admin/sectionEdit/{{= locals.category }}?id={{= obj._id }}">修改</a>&nbsp;&nbsp;&nbsp;
-													<a href="/admin/sectionRemove/{{= locals.category }}?id={{= obj._id }}">删除</a>
-												</td>
-											</tr>
-										{{ }); }}
 									</tbody>
 								</table>
 							</div>
 							<div class="row">
 								<div class="col-md-12">
 									<div class="dataTables_paginate paging_bootstrap" data-target="#searchForm">
-										{{ include ../include/pagination.html }}
 									</div>
 								</div>
 							</div>
@@ -191,6 +189,19 @@
 		   App.init();
 		   zeroApp.init();
 		});
+		
+		function fetchPage(){
+			console.log(3);
+			var href = '/admin/fetchData/fetchURL?url='+$('#urlAddress').val()
+			$.ajax({
+				url: href,
+				type: 'get',
+				dataType: 'text',
+				success: function(data){
+					$('#pageText').val(data)
+				}
+			});
+		}
 	</script>
 </body>
 <!-- END BODY -->

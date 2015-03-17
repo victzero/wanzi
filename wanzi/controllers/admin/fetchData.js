@@ -13,6 +13,7 @@ var extend = require('zero').extend;
 var rootCate = {
 	navID_jimubox: '61',
 	navID_tactics: '62',
+	navID_temp: '63',
 }
 
 //各个网站抓取策略查看页面.

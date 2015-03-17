@@ -41,7 +41,7 @@ exports.flip = function(filter, callback) {
 	}
 	query.category = filter.category;
 	//查询列表信息.
-	Item.find(query, '_id title status iterestRate duration amount urlAddress modifyTime', options, function(err, docs) {
+	Item.find(query, '_id title status iterestRate duration progress amount urlAddress modifyTime', options, function(err, docs) {
 		if (err) {
 			return callback(err);
 		}
@@ -68,6 +68,7 @@ exports.newAndSave = function(temp, callback){
 			item.iterestRate = temp.iterestRate;
 			item.duration = temp.duration;
 			item.amount = temp.amount;
+			item.progress = temp.progress;
 			item.urlAddress = temp.urlAddress;
 			item.save(callback);
 		}
