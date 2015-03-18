@@ -62,13 +62,14 @@ var processPackages = function(page, packages) {
 		// console.log(urlAddress);
 		if (zero.util.startWith(urlAddress, '/Project/Index')) {
 			// console.log('index');
-			processIndex(((page - 1) * 12 + i + 1), urlAddress);
+			processIndex(urlAddress);
 		} else if (zero.util.startWith(urlAddress, '/Project/ProjectSet')) {
 			// console.log('ProjectSet')
 		}
 	}
 }
-var processIndex = function(index, urlAddress) {
+
+exports.processIndex = processIndex = function(urlAddress) {
 	var requestOptions = url.parse(urlAddress);
 	requestOptions.host = 'www.jimubox.com';
 	requestOptions.port = 80;

@@ -82,6 +82,12 @@ module.exports = function(app) {
 	app.get('/admin/fetchData/jimubox_interval', function(req, res){
 		fetchData.jimubox_interval(req,res);
 	});
+	app.get('/admin/fetchData/jimubox_detail_update', function(req, res){
+		fetchData.jimubox_detail_update(req,res);
+	});
+	app.get('/admin/fetchData/jimubox_detail_interval', function(req, res){
+		fetchData.jimubox_detail_interval(req,res);
+	});
 	app.get('/admin/fetchData/tacticsList', function(req, res){
 		fetchData.tacticsList(req,res);
 	});
