@@ -1,5 +1,6 @@
 var url = require('url');
 var ar = require('./routes-admin');
+var br = require('./routes-business');
 var or = require('./routes-open');
 var fs = require("fs");
 
@@ -62,7 +63,7 @@ var manualRoute = function(app) {
 	});
 
 	ar(app);
-	
+	br(app);
 	or(app);
 
 }

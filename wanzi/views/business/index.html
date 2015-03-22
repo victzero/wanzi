@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="zh-CN" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="zh-CN" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!--> <html lang="zh-CN" class="no-js"> <!--<![endif]-->
+<head>
+	{{ include ./include/head.html }}
+</head>
+<body class="page-header-fixed page-sidebar-fixed page-footer-fixed ">
+	{{ include ./include/header.html }}
+	<div class="page-container">
+		{{ include ./include/body-left.html }}
+		<div class="page-content">
+			<!-- BEGIN PAGE HEADER-->
+			<div class="row">
+				<div class="col-md-12">
+					<h3 class="page-title">
+						首页
+					</h3>
+					<ul class="page-breadcrumb breadcrumb">
+						<li>
+							<i class="fa fa-home"></i>
+							<a href="/business">首页</a> 
+						</li>
+					</ul>
+				</div>
+			</div>
+			<h2>{{=locals.title }}</h2>
+		</div>
+		<!-- END PAGE -->
+	</div>
+	<!-- END CONTAINER -->
+	{{ include ./include/footer.html }}
+	<script type="text/javascript">var _NAVID = '1';</script>
+	{{ include ./include/scripts.html }}
+	<script>
+		jQuery(document).ready(function() {       
+		   App.init();
+		   zeroApp.init();
+		});
+	</script>
+</body>
+<!-- END BODY -->
+</html>

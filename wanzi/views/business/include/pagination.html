@@ -1,0 +1,26 @@
+
+<ul class="pagination">
+	{{ if(filter.pageNo - 1 <= 0){ }}
+	<li class="disabled"><a href="javascript:void(0);">&lt;&lt; 第一页</a></li>
+	<li class="disabled"><a href="javascript:void(0);">&lt;</a></li>
+	{{ } else { }}
+	<li><a data-flipto="1" >&lt;&lt; 第一页</a></li>
+	<li><a data-flipto="{{= filter.pageNo - 1 }}" >&lt;</a></li>
+	{{ } }}
+	
+	{{ for(var i = filter.pageStart,l = filter.pageEnd;i <= l; i++){ }}
+		<li class='{{= filter.pageNo == i ? "active": "" }}'><a data-flipto="{{= i }}">{{= i }}</a></li>
+	{{ } }}
+
+	{{ if(filter.pageNo >= filter.totalPage ){ }}
+		<li class="disabled"><a href="javascript:void(0);">&gt;</a></li>
+		<li class="disabled"><a href="javascript:void(0);">&gt;&gt; 最后一页</a></li>						
+	{{ } else { }}
+		<li><a data-flipto="{{= Number(filter.pageNo) + 1 }}" >&gt;</a></li>
+		<li><a data-flipto="{{= filter.totalPage }}" >&gt;&gt; 最后一页</a></li>				
+	{{ } }}
+</ul>
+<span class="pag_toolbar">
+	共 {{= filter.totalCount }} 条记录&nbsp;&nbsp;到第 <input class="pageNumber" type="text" value="{{= filter.pageNo }}" style="width:20px;margin-bottom:0px;"/> / 
+	{{= filter.totalPage }} 页&nbsp;<input type="button" class="btn btn-small btn-success jumpOK" onclick="gotoPage(this);" value="确定"/>
+</span>
