@@ -17,7 +17,7 @@ module.exports = function(app) {
 
 	//登录
 	app.get('/business/login', login.loginG);
-	// app.post('/business/login', login.loginP);
+	app.post('/business/login', login.loginP);
 	app.get('/business/logout', login.logout);
 
 	//动态类别,section

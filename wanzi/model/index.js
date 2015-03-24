@@ -2,14 +2,14 @@ var mongoose = require('mongoose');
 var config = require('../config').config;
 
 var options = {
-	server : {
-		poolSize : 5
+	server: {
+		poolSize: 5
 	},
 	auth: {
-		user : config.dbUser,
-		pass : config.dbPass
+		user: config.dbUser,
+		pass: config.dbPass
 	}
-	
+
 }
 
 mongoose.connect(config.db, options, function(err) {
@@ -20,12 +20,14 @@ mongoose.connect(config.db, options, function(err) {
 });
 
 require('./user');
+require('./bser');
 require('./topic');
 require('./cate');
 require('./item');
 require('./fetch/tactics');
 
 exports.User = mongoose.model('USER');
+exports.Bser = mongoose.model('BSER');
 exports.Topic = mongoose.model('TOPIC');
 exports.Cate = mongoose.model('CATE');
 exports.Item = mongoose.model('ITEM');
