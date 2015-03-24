@@ -4,7 +4,8 @@ var express = require('express');
 var ejs = require('ejs');
 var routes = require('./routes');
 var config = require('./config').config;
-var adminFilter = require('./filter/adminFilter').userNeeded;
+var adminFilter = require('./filter/adminFilter');
+var businessFilter = require('./filter/businessFilter');
 
 var home = require('./controllers/open/home');
 
@@ -52,7 +53,8 @@ app.configure(function() {
 	app.use('/assets', express.static(staticDir));
 	app.use(express.logger('dev'));
 
-	app.use('/admin', adminFilter);
+	app.use('/admin', adminFilter.userNeeded);
+	app.use('/business', businessFilter.bserNeeded);
 	app.use('/', home.init);
 
 	app.use(express.bodyParser({
