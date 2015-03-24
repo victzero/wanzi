@@ -17,6 +17,6 @@ exports.newAndSave = function(name, aliasname, pass, callback) {
 	var user = new User();
 	user.name = name;
 	user.aliasname = aliasname;
-	user.pass = pass;
+	user.password = pass;
 	user.save(callback);
 };

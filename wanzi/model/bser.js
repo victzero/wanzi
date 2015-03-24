@@ -6,15 +6,27 @@ var Schema = mongoose.Schema;
 var config = require('../config').config;
 
 var bserSchema = new Schema({
-	name : {
-		type : String,
-		index : true,
-		unique : true
+	name: {
+		type: String,
+		index: true,
+		unique: true
 	},
-	aliasname : {
-		type : String,
+	aliasname: {
+		type: String,
 	},
-	password : String,
+	password: String,
+	inusing: {
+		type: Boolean,
+		default: true
+	},
+	createTime: {
+		type: Date,
+		default: Date.now
+	},
+	modifyTime: {
+		type: Date,
+		default: Date.now
+	},
 });
 
 mongoose.model('BSER', bserSchema);

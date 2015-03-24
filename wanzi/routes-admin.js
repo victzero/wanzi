@@ -4,6 +4,7 @@ var home = require('./controllers/admin/home');
 var login = require('./controllers/admin/login');
 var instance = require('./controllers/admin/instance');
 var cate = require('./controllers/admin/cate');
+var bserController = require('./controllers/admin/bser');
 var section = require('./controllers/admin/section');
 var fetchData = require('./controllers/admin/fetchData')
 var fetchTemp = require('./controllers/admin/fetch/temp')
@@ -72,31 +73,36 @@ module.exports = function(app) {
 		routeSplit(req, res, section.remove, true);
 	});
 
+	//商家用户管理.
+	app.get('/admin/bserList', bserController.list);
+	app.get('/admin/bserEdit', bserController.edit);
+	app.post('/admin/bserEdit', bserController.editP);
+
 	//数据抓取.
-	app.get('/admin/fetchData/jimuBox', function(req, res){
-		fetchData.jimubox_list(req,res);
+	app.get('/admin/fetchData/jimuBox', function(req, res) {
+		fetchData.jimubox_list(req, res);
 	});
-	app.get('/admin/fetchData/jimubox_update', function(req, res){
-		fetchData.jimubox_update(req,res);
+	app.get('/admin/fetchData/jimubox_update', function(req, res) {
+		fetchData.jimubox_update(req, res);
 	});
-	app.get('/admin/fetchData/jimubox_interval', function(req, res){
-		fetchData.jimubox_interval(req,res);
+	app.get('/admin/fetchData/jimubox_interval', function(req, res) {
+		fetchData.jimubox_interval(req, res);
 	});
-	app.get('/admin/fetchData/jimubox_detail_update', function(req, res){
-		fetchData.jimubox_detail_update(req,res);
+	app.get('/admin/fetchData/jimubox_detail_update', function(req, res) {
+		fetchData.jimubox_detail_update(req, res);
 	});
-	app.get('/admin/fetchData/jimubox_detail_interval', function(req, res){
-		fetchData.jimubox_detail_interval(req,res);
+	app.get('/admin/fetchData/jimubox_detail_interval', function(req, res) {
+		fetchData.jimubox_detail_interval(req, res);
 	});
-	app.get('/admin/fetchData/tacticsList', function(req, res){
-		fetchData.tacticsList(req,res);
+	app.get('/admin/fetchData/tacticsList', function(req, res) {
+		fetchData.tacticsList(req, res);
 	});
 
 	//测试地址.
-	app.get('/admin/fetchData/parsePage', function(req, res){
+	app.get('/admin/fetchData/parsePage', function(req, res) {
 		fetchTemp.fetchPage(req, res);
 	})
-	app.get('/admin/fetchData/fetchURL', function(req, res){
+	app.get('/admin/fetchData/fetchURL', function(req, res) {
 		fetchTemp.fetchURL(req, res);
 	})
 
@@ -111,13 +117,13 @@ var routeSplit = function(req, res, callback, dontCheck) {
 	var args = paths.slice(3);
 
 	if (dontCheck) {
-		callback.apply(null, [ req, res ].concat(args));
+		callback.apply(null, [req, res].concat(args));
 		return;
 	}
 
 	var cate = paths[3];
 	if (instance.assertIns(cate)) {
-		callback.apply(null, [ req, res ].concat(args));
+		callback.apply(null, [req, res].concat(args));
 		return;
 	}
 	res.redirect(config.error404);

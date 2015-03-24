@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="zh-CN" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="zh-CN" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!--> <html lang="zh-CN" class="no-js"> <!--<![endif]-->
+<head>
+	{{ include ./include/head.html }}
+</head>
+<body class="page-header-fixed page-sidebar-fixed page-footer-fixed ">
+	{{ include ./include/header.html }}
+	<div class="page-container">
+		{{ include ./include/body-left.html }}
+		<div class="page-content">
+			<!-- BEGIN PAGE HEADER-->
+			<div class="row">
+				<div class="col-md-12">
+					<!-- BEGIN PAGE TITLE & BREADCRUMB-->			
+					<h3 class="page-title">
+						{{= cons.name }}管理--查询
+					</h3>
+					<ul class="page-breadcrumb breadcrumb">
+						<li>
+							<i class="fa fa-home"></i>
+							<a href="/admin">首页</a> 
+							<i class="fa fa-angle-right"></i>
+						</li>
+						<li>
+							<a href="/admin/cateList">{{= cons.name }}管理</a>
+							<i class="fa fa-angle-right"></i>
+						</li>
+						<li>查询</li>
+					</ul>
+					<!-- END PAGE TITLE & BREADCRUMB-->
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<!-- BEGIN SAMPLE TABLE PORTLET-->
+					<div class="portlet box blue">
+						<div class="portlet-title">
+							<div class="caption"><i class="fa fa-cogs"></i>{{= cons.name }}结果</div>
+							<div class="tools">
+								<a href="javascript:;" class="collapse"></a>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="table-scrollable">
+								<table class="table table-striped table-bordered table-hover">
+									<thead>
+										<tr>
+											<th scope="col" style="width: 50px;" >序号</th>
+											<th scope="col" >用户名</th>
+											<th scope="col" >用户昵称</th>
+											<th scope="col" >更新时间</th>
+											<th scope="col" >操作</th>
+										</tr>
+									</thead>
+									<tbody>
+										{{ list.forEach(function(obj, index){ }}
+											<tr>
+												<td>{{= (filter.pageNo-1) * filter.pageSize + index + 1 }}</td>
+												<td>{{= obj.name }}</td>
+												<td>{{= obj.aliasname }}</td>
+												<td>{{= fmt.format_date(obj.modifyTime) }}</td>
+												<td>
+													{{ if(obj.inusing) { }}
+													<span class="label label-info">启用中</span>
+													<a href="/admin/bserShut?id={{= obj._id }}&using=false">禁用(TODO)</a>
+													{{ } }}
+													{{ if(!obj.inusing) { }}
+													<span class="label label-danger">禁用中</span>
+													<a href="/admin/bserShut?id={{= obj._id }}&using=true">启用</a>
+													{{ } }}
+												</td>
+											</tr>
+										{{ }); }}
+									</tbody>
+								</table>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="dataTables_paginate flip-pagination paging_bootstrap" data-target="#searchForm">
+										{{ include ./include/pagination.html }}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- END SAMPLE TABLE PORTLET-->
+				</div>
+			</div>
+			<!-- END PAGE CONTENT-->
+		</div>
+		<!-- END PAGE -->
+	</div>
+	<!-- END CONTAINER -->
+	{{ include ./include/footer.html }}
+	<script type="text/javascript">var _NAVID = '{{= cons.navID_list }}';</script>
+	{{ include ./include/scripts.html }}
+	<script>
+		jQuery(document).ready(function() {       
+		   App.init();
+		   zeroApp.init();
+		});
+	</script>
+</body>
+<!-- END BODY -->
+</html>

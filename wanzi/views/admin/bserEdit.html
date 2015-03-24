@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="zh-CN" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="zh-CN" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!--> <html lang="zh-CN" class="no-js"> <!--<![endif]-->
+<head>
+	{{ include ./include/head.html }}
+	<link rel="stylesheet" type="text/css" href="../../assets/resources/metronic_admin/plugins/bootstrap-fileupload/bootstrap-fileupload.css" />
+</head>
+<body class="page-header-fixed page-sidebar-fixed page-footer-fixed ">
+	{{ include ./include/header.html }}
+	<div class="page-container">
+		{{ include ./include/body-left.html }}
+		<div class="page-content">
+			<!-- BEGIN PAGE HEADER-->
+			<div class="row">
+				<div class="col-md-12">
+					<!-- BEGIN PAGE TITLE & BREADCRUMB-->			
+					<h3 class="page-title">
+						{{= cons.name }}管理--添加
+					</h3>
+					<ul class="page-breadcrumb breadcrumb">
+						<li>
+							<i class="fa fa-home"></i>
+							<a href="/admin">首页</a> 
+							<i class="fa fa-angle-right"></i>
+						</li>
+						<li>
+							<a href="/admin/cateList">{{= cons.name }}管理</a>
+							<i class="fa fa-angle-right"></i>
+						</li>
+						<li>添加</li>
+					</ul>
+					<!-- END PAGE TITLE & BREADCRUMB-->
+				</div>
+			</div>
+			<!-- END PAGE HEADER-->
+			<!-- BEGIN PAGE CONTENT-->
+			<div class="tab-pane ">
+				<div class="portlet box green">
+					<div class="portlet-title">
+						<div class="caption"><i class="fa fa-reorder"></i>{{= cons.name }}添加</div>
+						<div class="tools">
+							<a href="javascript:;" class="collapse"></a>
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<!-- BEGIN FORM-->
+						<form id="cateEditForm" enctype="multipart/form-data" method="post" action="/admin/bserEdit" class="form-horizontal">
+							<div class="form-body">
+								 <input type="hidden" name="obj[_id]" value="{{= typeof obj._id!='undefined' ? obj._id : '' }}">
+		                         <div class="form-group">
+		                            <label class="control-label col-md-2">用户名<span class="required">*</span></label>
+		                            <div class="col-md-5">
+			                            <input type="text" name="obj[name]" value="{{= typeof obj.name!='undefined' ? obj.name : ''}}" class="form-control required" placeholder="用户名" style="  margin-bottom: 8px;">
+			                            <span class="label label-danger">提示</span>
+										<span>默认密码为123456</span>
+		                            </div>
+		                         </div>
+		                         <div class="form-group">
+		                            <label class="control-label col-md-2">用户昵称<span class="required">*</span></label>
+		                            <div class="col-md-5">
+			                            <input type="text" name="obj[aliasname]" {{= typeof obj._id!='undefined' ? 'disabled' : '' }} value="{{= typeof obj.aliasname!='undefined' ? obj.aliasname : ''}}" class="form-control required" placeholder="用户昵称">
+		                            </div>
+		                         </div>
+							</div>
+							<div class="form-actions fluid">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="col-md-offset-8 col-md-2">
+											<button type="submit" class="btn green">提交</button>
+											<button type="button" onclick="historyGoBack(-1);" class="btn default">返回</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+						<!-- END FORM-->                
+					</div>
+				</div>
+			</div>
+			<!-- END PAGE CONTENT-->
+		</div>
+		<!-- END PAGE -->
+	</div>
+	<!-- END CONTAINER -->
+	{{ include ./include/footer.html }}
+	<script type="text/javascript">var _NAVID = '{{= cons.navID_edit }}';</script>
+	{{ include ./include/scripts.html }}
+	<script type="text/javascript" src="/assets/resources/metronic_admin/plugins/ckeditor/ckeditor.js"></script>
+	<script type="text/javascript" src="/assets/resources/metronic_admin/plugins/bootstrap-fileupload/bootstrap-fileupload.js"></script>
+	<script>
+		jQuery(document).ready(function() {       
+		   App.init();
+		   zeroApp.init();
+		});
+		zeroValidation({
+			form : 'cateEditForm',
+			onsubmit : true,
+		});
+	</script>
+</body>
+<!-- END BODY -->
+</html>
