@@ -8,7 +8,7 @@ var FlipFilter = require('zero').FlipFilter;
 var cons = {
 	name : '护栏类别',
 	navID_list : '21',
-	navID_edit : '21',
+	navID_edit : '22',
 };
 
 /**

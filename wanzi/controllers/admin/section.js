@@ -9,15 +9,15 @@ var FlipFilter = require('zero').FlipFilter;
 var extend = require('zero').extend;
 
 var rootCate = {
-	navID_list : '21',
-	navID_edit : '22',
+	navID_list: '21',
+	navID_edit: '22',
 }
 
 /**
- * 类别子项 列表
+ * 类别子项 列表,get & post
  */
 exports.list = function(req, res, category) {
-	cateDAO.getCateByPN(category, function(err, cate) {// 查找子项
+	cateDAO.getCateByPN(category, function(err, cate) { // 查找子项
 		if (err) {
 			throw err;
 		}
@@ -38,17 +38,17 @@ exports.list = function(req, res, category) {
 			}
 
 			var cons = {
-				name : cate.title,
+				name: cate.title,
 			};
 			extend(cons, rootCate);
 			res.render('admin/sectionList', {
-				title : cons.name + '管理',
-				list : list,
-				fmt : fmt,
-				s_title : stitle,
-				category : category,
-				cons : cons,
-				filter : filter.init()
+				title: cons.name + '管理',
+				list: list,
+				fmt: fmt,
+				s_title: stitle,
+				category: category,
+				cons: cons,
+				filter: filter.init()
 			});
 		});
 	});
@@ -56,7 +56,7 @@ exports.list = function(req, res, category) {
 }
 
 exports.edit = function(req, res, category) {
-	cateDAO.getCateByPN(category, function(err, cate) {// 查找子项
+	cateDAO.getCateByPN(category, function(err, cate) { // 查找子项
 		if (err) {
 			throw err;
 		}
@@ -66,34 +66,34 @@ exports.edit = function(req, res, category) {
 		}
 		var id = req.query['id'];
 		var cons = {
-			name : cate.title,
+			name: cate.title,
 		};
 		extend(cons, rootCate);
-		if (id) {// 修改
+		if (id) { // 修改
 			topicDAO.getTopicById(id, function(err, obj) {
 				if (err) {
 					throw err;
 				}
 				res.render('admin/sectionEdit', {
-					title : cons.name + '管理-修改' + '--' + obj.title,
-					topic : obj,
-					cons : cons
+					title: cons.name + '管理-修改' + '--' + obj.title,
+					topic: obj,
+					cons: cons
 				});
 			});
-		} else {// 添加
+		} else { // 添加
 			res.render('admin/sectionEdit', {
-				title : cons.name + '管理-添加',
-				topic : {
-					category : category
+				title: cons.name + '管理-添加',
+				topic: {
+					category: category
 				},
-				cons : cons
+				cons: cons
 			});
 		}
 	});
 }
 
 exports.detail = function(req, res, category) {
-	cateDAO.getCateByPN(category, function(err, cate) {// 查找子项
+	cateDAO.getCateByPN(category, function(err, cate) { // 查找子项
 		if (err) {
 			throw err;
 		}
@@ -107,13 +107,13 @@ exports.detail = function(req, res, category) {
 				throw err;
 			}
 			var cons = {
-				name : cate.title,
+				name: cate.title,
 			};
 			extend(cons, rootCate);
 			res.render('admin/sectionDetail', {
-				title : cons.name + '管理-详情--' + obj.title,
-				topic : obj,
-				cons : cons
+				title: cons.name + '管理-详情--' + obj.title,
+				topic: obj,
+				cons: cons
 			});
 		});
 	});
@@ -131,7 +131,7 @@ exports.remove = function(req, res, category) {
 }
 
 exports.editP = function(req, res, category) {
-	cateDAO.getCateByPN(category, function(err, cate) {// 验证category.
+	cateDAO.getCateByPN(category, function(err, cate) { // 验证category.
 		if (err) {
 			throw err;
 		}
@@ -142,7 +142,7 @@ exports.editP = function(req, res, category) {
 		var topic = req.body.topic;
 		topic.category = category;
 		var file = req.files && req.files.img;
-		if (!file || !file.size) {// error:修改时仍然是新增.
+		if (!file || !file.size) { // error:修改时仍然是新增.
 			if (topic._id) {
 				topic.modifyTime = Date.now();
 				topicDAO.update(topic._id, topic, function() {

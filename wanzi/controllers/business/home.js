@@ -3,18 +3,11 @@ var FlipFilter = require('zero').FlipFilter;
 
 var cateDAO = require('../../dao').CateDAO;
 
-exports.index = function(req, res) {
-	var filter = new FlipFilter( );
-	cateDAO.flip(filter, function(err, cates) {
-		if (err) {
-			throw err;
-		}
+var renderUtil = require('./util/renderUtil');
 
-		res.render('business/index', {
-			title: '欢迎来到信息发布系统商家控制台',
-			navs: cates,
-			fmt: fmt,
-			filter: filter.init()
-		});
-	});
+exports.index = function(req, res) {
+	renderUtil.render(res, 'business/index', {
+		title: '欢迎使用信息发布系统商家控制台',
+		fmt: fmt,
+	})
 }
