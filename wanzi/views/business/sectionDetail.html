@@ -88,23 +88,21 @@
 									<label class="control-label col-md-2">{{= field.alias }}</label>
 									{{ if(field.editor == 'text'){ }}
 									<div class="col-md-5">
-			                            <input type="text" name="topic[field.name]" disabled="disabled" value="{{= typeof topic[field.name]!='undefined' ? topic[field.name] : ''}}" class="form-control required" >
+			                            <input type="text" name="topic[field.name]" disabled="disabled" value="{{= typeof topic.get(field.name) !='undefined' ? topic.get(field.name) : ''}}" class="form-control required" >
 		                            </div>
 									{{ } }}
 									{{ if(field.editor == 'rich_text'){ }}
 									<div class="col-md-8 well">
-										{{- typeof topic[field.name]!='undefined' ? topic[field.name] : ''}}
+										{{- typeof topic.get(field.name)!='undefined' ? topic.get(field.name) : ''}}
 									</div>
 									{{ } }}
 									{{ if(field.editor == 'image'){ }}
 									<div class="col-md-4"><!-- TODO: field.width & height -->
-			                           <img alt="" src="{{= topic[field.name] }}" style="width: 260px; height: 200px;">
+			                           <img alt="" src="{{= topic.get(field.name) }}" style="width: 260px; height: 200px;">
 		                            </div>
 									{{ } }}
-									
 								</div>
 								{{	});	}}
-
 							</div>
 							<div class="form-actions fluid">
 								<div class="row">

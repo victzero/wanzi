@@ -3,29 +3,29 @@ var Topic = model.Topic;
 
 exports.getTopicByName = function(title, callback) {
 	Topic.findOne({
-		'title' : title
+		'title': title
 	}, callback);
 }
 
 exports.getTopicById = function(id, callback) {
 	Topic.findOne({
-		_id : id
+		_id: id
 	}, callback);
 };
 
 exports.removeById = function(id, callback) {
 	Topic.remove({
-		_id : id
+		_id: id
 	}, callback);
 }
 
 // 对topic进行分页.
 exports.flip = function(filter, callback) {
 	var options = {
-		skip : (filter.pageNo - 1) * filter.pageSize,
-		limit : filter.pageSize,
-		sort : {
-			modifyTime : -1
+		skip: (filter.pageNo - 1) * filter.pageSize,
+		limit: filter.pageSize,
+		sort: {
+			modifyTime: -1
 		}
 	};
 	var query = {};
@@ -60,6 +60,6 @@ exports.newAndSave = function(temp, callback) {
 exports.update = function(id, topic, callback) {
 	delete topic._id;
 	Topic.update({
-		_id : id
+		_id: id
 	}, topic, callback);
 }

@@ -106,12 +106,12 @@
 									<label class="control-label col-md-2">{{= field.alias }}</label>
 									{{ if(field.editor == 'text'){ }}
 									<div class="col-md-5">
-										<input type="text" name="topic[field.name]" value="{{= typeof topic[field.name]!='undefined' ? topic[field.name]: ''}}" class="form-control " >
+										<input type="text" name="topic[{{= field.name }}]" value="{{= typeof topic[field.name]!='undefined' ? topic[field.name]: ''}}" class="form-control " >
 									</div>
 									{{ } }}
 									{{ if(field.editor == 'rich_text'){ }}
 									<div class="col-md-8">
-										<textarea class="ckeditor form-control" name="topic[field.name]" rows="6" data-error-container="#editor{{= index + 10 }}_error">{{= typeof topic[field.name]!='undefined' ? topic[field.name] : ''}}</textarea>
+										<textarea class="ckeditor form-control" name="topic[{{= field.name }}]" rows="6" data-error-container="#editor{{= index + 10 }}_error">{{= typeof topic[field.name]!='undefined' ? topic[field.name] : ''}}</textarea>
 										<div id="editor{{= index + 10 }}_error"></div>
 									</div>
 									{{ } }}
@@ -120,7 +120,7 @@
 										<div class="fileupload fileupload-new" data-provides="fileupload">
 											<div class="fileupload-new thumbnail" style="width: 260px; height: 200px;">
 												<img src="{{= typeof topic[field.name]!='undefined' ? topic[field.name] : '/assets/img/206-200-NO_IMG.gif'}}" style="width:260px;height:200px;" alt="" />
-												<input type='hidden' name="topic[field.name]" value="{{= typeof topic[field.name]!='undefined' ? topic[field.name] : '/assets/img/206-200-NO_IMG.gif'}}">
+												<input type='hidden' name="topic[{{= field.name }}]" value="{{= typeof topic[field.name]!='undefined' ? topic[field.name] : '/assets/img/206-200-NO_IMG.gif'}}">
 											</div>
 											<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 260px; max-height: 200px; line-height: 20px;"></div>
 											<div>

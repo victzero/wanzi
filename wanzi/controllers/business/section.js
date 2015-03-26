@@ -3,6 +3,7 @@ var path = require('path');
 var sys = require('sys');
 var config = require('../../config');
 var topicDAO = require('../../dao').TopicDAO;
+var topicDAON = require('../../daon/topicDAON');
 var cateDAO = require('../../dao').CateDAO;
 var fmt = require('zero').fmt;
 var FlipFilter = require('zero').FlipFilter;
@@ -69,7 +70,7 @@ exports.edit = function(req, res, category) {
 				if (err) {
 					throw err;
 				}
-				renderUtil.render(res,'business/sectionEdit', {
+				renderUtil.render(res, 'business/sectionEdit', {
 					title: cons.name + '管理-修改' + '--' + obj.title,
 					topic: obj,
 					cons: cons,
@@ -77,7 +78,7 @@ exports.edit = function(req, res, category) {
 				});
 			});
 		} else { // 添加
-			renderUtil.render(res,'business/sectionEdit', {
+			renderUtil.render(res, 'business/sectionEdit', {
 				title: cons.name + '管理-添加',
 				topic: {
 					category: category
@@ -107,7 +108,7 @@ exports.detail = function(req, res, category) {
 				name: cate.title,
 			};
 			// extend(cons, rootCate);
-			renderUtil.render(res,'business/sectionDetail', {
+			renderUtil.render(res, 'business/sectionDetail', {
 				title: cons.name + '管理-详情--' + obj.title,
 				topic: obj,
 				cons: cons,
@@ -138,17 +139,20 @@ exports.editP = function(req, res, category) {
 			return;
 		}
 		var topic = req.body.topic;
+		
 		topic.category = category;
 		var file = req.files && req.files.img;
 		if (!file || !file.size) { // error:修改时仍然是新增.
-			if (topic._id) {
+			if (topic._id && topic._id != '') {
 				topic.modifyTime = Date.now();
 				topicDAO.update(topic._id, topic, function() {
 					res.redirect('/business/sectionList/' + category);
 				});
 				return;
 			} else {
-				topicDAO.newAndSave(topic, function() {
+				delete topic._id;
+				console.log(topic)
+				topicDAON.save(topic, function() {
 					res.redirect('/business/sectionList/' + category);
 				});
 				return;
