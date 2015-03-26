@@ -72,7 +72,8 @@ exports.edit = function(req, res, category) {
 				renderUtil.render(res,'business/sectionEdit', {
 					title: cons.name + '管理-修改' + '--' + obj.title,
 					topic: obj,
-					cons: cons
+					cons: cons,
+					fields: cate.fields
 				});
 			});
 		} else { // 添加
@@ -81,7 +82,8 @@ exports.edit = function(req, res, category) {
 				topic: {
 					category: category
 				},
-				cons: cons
+				cons: cons,
+				fields: cate.fields
 			});
 		}
 	});
@@ -108,7 +110,8 @@ exports.detail = function(req, res, category) {
 			renderUtil.render(res,'business/sectionDetail', {
 				title: cons.name + '管理-详情--' + obj.title,
 				topic: obj,
-				cons: cons
+				cons: cons,
+				fields: cate.fields
 			});
 		});
 	});

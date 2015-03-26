@@ -113,7 +113,8 @@ exports.detail = function(req, res, category) {
 			res.render('admin/sectionDetail', {
 				title: cons.name + '管理-详情--' + obj.title,
 				topic: obj,
-				cons: cons
+				cons: cons,
+				
 			});
 		});
 	});

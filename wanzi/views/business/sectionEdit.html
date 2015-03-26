@@ -101,6 +101,44 @@
 										<div id="editor1_error"></div>
 									</div>
 								</div>
+								{{	fields.forEach(function(field, index){ }}
+								<div class="form-group">
+									<label class="control-label col-md-2">{{= field.alias }}</label>
+									{{ if(field.editor == 'text'){ }}
+									<div class="col-md-5">
+										<input type="text" name="topic[field.name]" value="{{= typeof topic[field.name]!='undefined' ? topic[field.name]: ''}}" class="form-control " >
+									</div>
+									{{ } }}
+									{{ if(field.editor == 'rich_text'){ }}
+									<div class="col-md-8">
+										<textarea class="ckeditor form-control" name="topic[field.name]" rows="6" data-error-container="#editor{{= index + 10 }}_error">{{= typeof topic[field.name]!='undefined' ? topic[field.name] : ''}}</textarea>
+										<div id="editor{{= index + 10 }}_error"></div>
+									</div>
+									{{ } }}
+									{{ if(field.editor == 'image'){ }}
+									<div class="col-md-6">
+										<div class="fileupload fileupload-new" data-provides="fileupload">
+											<div class="fileupload-new thumbnail" style="width: 260px; height: 200px;">
+												<img src="{{= typeof topic[field.name]!='undefined' ? topic[field.name] : '/assets/img/206-200-NO_IMG.gif'}}" style="width:260px;height:200px;" alt="" />
+												<input type='hidden' name="topic[field.name]" value="{{= typeof topic[field.name]!='undefined' ? topic[field.name] : '/assets/img/206-200-NO_IMG.gif'}}">
+											</div>
+											<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 260px; max-height: 200px; line-height: 20px;"></div>
+											<div>
+												<span class="btn default btn-file">
+												<span class="fileupload-new"><i class="fa fa-paper-clip"></i> 选择图片</span>
+												<span class="fileupload-exists"><i class="fa fa-undo"></i> 修改</span>
+												<input type="file" name="img" class="default" />
+												</span>
+												<a href="#" class="btn red fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
+											</div>
+										</div>
+										<span class="label label-danger">提示</span>
+										<span>请使用如下浏览器:Firefox, Chrome, Opera, Safari,建议尺寸:260px*200px.</span>
+		                            </div>
+									{{ } }}
+									
+								</div>
+								{{	});	}}
 
 							</div>
 							<div class="form-actions fluid">
@@ -133,10 +171,10 @@
 		   App.init();
 		   zeroApp.init();
 		});
-		CKEDITOR.replace( "ckeditor1", {
-			allowedContent: true,
-			height: '500px'
-		});
+		// CKEDITOR.replace( "ckeditor1", {
+		// 	allowedContent: true,
+		// 	height: '500px'
+		// });
 		zeroValidation({
 			form : 'sectionEditForm',
 			onsubmit : true,
