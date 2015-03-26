@@ -54,6 +54,7 @@ module.exports = function(app) {
 	app.get('/admin/cateRemove', cate.remove);
 	app.get('/admin/cateFieldEdit', cate.fieldEdit);
 	app.post('/admin/cateFieldEdit', cate.fieldEditP);
+	app.get('/admin/fieldsRemoveAll', cate.fieldsRemoveAll);
 
 	// 动态类别,section.
 	app.get('/admin/sectionList/*', function(req, res) {

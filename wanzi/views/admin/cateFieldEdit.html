@@ -103,10 +103,23 @@
 name: '',
 alias: '',
 type:'String',
-editor:'input-text',
+editor:'text',
 sortNum: 0,
 }
 			                            </textarea>
+			                            <span class="label label-info">提示</span>
+										<span><br>
+							{<br>
+								name: String,//键名<br>
+								alias: String,//别名<br>
+								type:{ type : String, default: 'String' } ,//字段类型,String, Number, Boolean, Date, Image<br>
+								editor:{ type : String, default: 'text' } ,//编辑器, text, rich_text, image<br>
+								// 单位px, for image.<br>
+								width: 0,<br>
+								height: 0,<br>
+								sortNum: { type : Number, default: 0 } ,//从大到小排序<br>
+							}
+										</span>
 		                            </div>
 		                         </div>
 							</div>
@@ -115,6 +128,7 @@ sortNum: 0,
 									<div class="col-md-12">
 										<div class="col-md-offset-8 col-md-2">
 											<button type="submit" class="btn green">提交</button>
+											<button type="button" onclick="location.href='/admin/fieldsRemoveAll?id={{= obj._id}}'" class="btn blue">清空属性</button>
 											<button type="button" onclick="historyGoBack(-1);" class="btn default">返回</button>
 										</div>
 									</div>
@@ -143,6 +157,9 @@ sortNum: 0,
 											<th scope="col" style="width: 50px;" >序号</th>
 											<th scope="col" >属性昵称</th>
 											<th scope="col" >属性键名</th>
+											<th scope="col" >类型</th>
+											<th scope="col" >编辑器</th>
+											<th scope="col" >排序号</th>
 											<th scope="col" >更新时间</th>
 										</tr>
 									</thead>
@@ -152,6 +169,9 @@ sortNum: 0,
 											<td>{{= index + 1}}</td>
 											<td>{{= field.alias }}</td>
 											<td>{{= field.name }}</td>
+											<td>{{= field.type }}</td>
+											<td>{{= field.editor }}</td>
+											<td>{{= field.sortNum }}</td>
 											<td>{{= fmt.format_date(field.modifyTime) }}</td>
 										</tr>
 										{{ }); }}
