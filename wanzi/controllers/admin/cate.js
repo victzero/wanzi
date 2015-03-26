@@ -3,12 +3,13 @@ var path = require('path');
 var config = require('../../config');
 var cateDAO = require('../../dao').CateDAO;
 var fmt = require('zero').fmt;
+var extend = require('zero').extend;
 var FlipFilter = require('zero').FlipFilter;
 
 var cons = {
-	name : '护栏类别',
-	navID_list : '21',
-	navID_edit : '22',
+	name: '动态类别',
+	navID_list: '21',
+	navID_edit: '22',
 };
 
 /**
@@ -28,34 +29,34 @@ exports.list = function(req, res) {
 		}
 
 		res.render('admin/cateList', {
-			title : cons.name + '管理',
-			list : cates,
-			fmt : fmt,
-			s_title : stitle,
-			cons : cons,
-			filter : filter.init()
+			title: cons.name + '管理',
+			list: cates,
+			fmt: fmt,
+			s_title: stitle,
+			cons: cons,
+			filter: filter.init()
 		});
 	});
 }
 
 exports.edit = function(req, res) {
 	var id = req.query['id'];
-	if (id) {// 修改
+	if (id) { // 修改
 		cateDAO.getCateById(id, function(err, obj) {
 			if (err) {
 				throw err;
 			}
 			res.render('admin/cateEdit', {
-				title : cons.name + '管理-修改' + '--' + obj.title,
-				obj : obj,
-				cons : cons
+				title: cons.name + '管理-修改' + '--' + obj.title,
+				obj: obj,
+				cons: cons
 			});
 		});
-	} else {// 添加
+	} else { // 添加
 		res.render('admin/cateEdit', {
-			title : cons.name + '管理-添加',
-			obj : {},
-			cons : cons
+			title: cons.name + '管理-添加',
+			obj: {},
+			cons: cons
 		});
 	}
 }
@@ -102,4 +103,64 @@ exports.editP = function(req, res) {
 		});
 	}
 
+}
+
+/**
+ * 属性编辑
+ * @param  {[type]} req [description]
+ * @param  {[type]} res [description]
+ * @return {[type]}     [description]
+ */
+exports.fieldEdit = function(req, res) {
+	var id = req.query['id'];
+	if (id) { // 修改
+		cateDAO.getCateById(id, function(err, obj) {
+			if (err) {
+				throw err;
+			}
+			res.render('admin/cateFieldEdit', {
+				title: cons.name + '属性管理',
+				obj: obj,
+				cons: cons,
+				fmt: fmt
+			});
+		});
+	}
+}
+
+/**
+ * 属性新增
+ * @param  {[type]} req [description]
+ * @param  {[type]} res [description]
+ * @return {[type]}     [description]
+ */
+exports.fieldEditP = function(req, res) {
+	var id = req.body['id'];
+	var fieldStr = req.body['field'];
+	var field = eval('(' + fieldStr + ')'); //json
+	if (id) { // 修改
+		cateDAO.getCateById(id, function(err, obj) {
+			if (err) {
+				throw err;
+			}
+
+			//不能修改,只能添加.TODO:增加删除功能.
+			/*{
+				name: String,//键名
+				alias: String,//别名
+				type:{ type : String, default: 'String' } ,//字段类型,String, Number, Boolean, Date
+				editor:{ type : String, default: 'input-text' } ,//编辑器类别.
+				sortNum: { type : Number, default: 0 } ,
+			}*/
+			cateDAO.update(id, {
+				'$push': {
+					fields: field
+				}
+			}, function() {
+				res.redirect('admin/cateFieldEdit?id=' + id);
+			});
+		});
+	} else {
+		res.redirect('/404')
+	}
 }
