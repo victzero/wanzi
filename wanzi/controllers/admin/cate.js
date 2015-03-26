@@ -128,6 +128,27 @@ exports.fieldEdit = function(req, res) {
 	}
 }
 
+exports.fieldsRemoveAll = function(req, res) {
+	var id = req.query['id'];
+	if (id) { // 修改
+		cateDAO.getCateById(id, function(err, obj) {
+			if (err) {
+				throw err;
+			}
+
+			cateDAO.update(id, {
+				'$set': {
+					fields: []
+				}
+			}, function() {
+				res.redirect('admin/cateFieldEdit?id=' + id);
+			});
+		});
+	} else {
+		res.redirect('/404')
+	}
+}
+
 /**
  * 属性新增
  * @param  {[type]} req [description]
