@@ -81,7 +81,8 @@ exports.edit = function(req, res, category) {
 			renderUtil.render(res, 'business/sectionEdit', {
 				title: cons.name + '管理-添加',
 				topic: {
-					category: category
+					category: category,
+					get: function() {}
 				},
 				cons: cons,
 				fields: cate.fields
@@ -139,56 +140,107 @@ exports.editP = function(req, res, category) {
 			return;
 		}
 		var topic = req.body.topic;
-		
+
 		topic.category = category;
-		var file = req.files && req.files.img;
-		if (!file || !file.size) { // error:修改时仍然是新增.
+		var imgs = req.files && req.files.img;
+
+		var length = Object.keys(imgs).length;
+		var upIndex = 0;
+		var nothingIndex = 0;
+		console.log('上传文件数;' + length)
+		if (length != 0) {
+			for (var key in imgs) {
+				img = imgs[key];
+				if (!img || !img.size) { //该文件为空
+					nothingIndex++;
+				} else {
+					saveFile(img, function(data) {
+						topic[key] = data.img;
+						topic[key + '_rp'] = data.realpath; //rp = realpath.
+						upIndex++;
+						console.log('upIndex' + upIndex + ',length' + length)
+
+						if (upIndex + nothingIndex == length) { //最后一个了.
+							if (topic._id) { //修改
+								console.log('有文件修改')
+								topic.modifyTime = Date.now();
+								topicDAON.update(topic._id, topic, function() {
+									res.redirect('/business/sectionList/' + category);
+								});
+								return;
+							} else { //新增
+								console.log('有文件新增')
+								delete topic._id;
+								topicDAON.save(topic, function() {
+									res.redirect('/business/sectionList/' + category);
+								});
+								return;
+							}
+						}
+					});
+				}
+				if (nothingIndex == length) { //全都没有上传.
+					//没有需要上传的文件.
+					if (topic._id && topic._id != '') {
+						console.log('有文件都未上传修改')
+						topic.modifyTime = Date.now();
+						topicDAON.update(topic._id, topic, function() {
+							res.redirect('/business/sectionList/' + category);
+						});
+						return;
+					} else {
+						console.log('有文件都未上传新增')
+						delete topic._id;
+						topicDAON.save(topic, function() {
+							res.redirect('/business/sectionList/' + category);
+						});
+						return;
+					}
+				}
+			}
+		} else {
+			//没有需要上传的文件.
 			if (topic._id && topic._id != '') {
+				console.log('无文件修改' + topic)
 				topic.modifyTime = Date.now();
-				topicDAO.update(topic._id, topic, function() {
+				topicDAON.update(topic._id, topic, function() {
 					res.redirect('/business/sectionList/' + category);
 				});
 				return;
 			} else {
+				console.log('无文件新增')
 				delete topic._id;
-				console.log(topic)
 				topicDAON.save(topic, function() {
 					res.redirect('/business/sectionList/' + category);
 				});
 				return;
 			}
 		}
+	});
+}
 
-		var tmp_path = file.path;
-		var filename = Date.now() + '_' + file.name;
+function saveFile(file, callback) {
+	var tmp_path = file.path;
+	var filename = Date.now() + '_' + file.name;
 
-		var target_path = path.join(config.upload_img_dir, filename);
+	var target_path = path.join(config.upload_img_dir, filename);
 
-		fs.rename(tmp_path, target_path, function(err) {
+	fs.rename(tmp_path, target_path, function(err) {
+		if (err) {
+			throw err;
+		}
+		// 删除临时文件夹文件,
+		fs.unlink(tmp_path, function() {
 			if (err) {
 				throw err;
 			}
-			// 删除临时文件夹文件,
-			fs.unlink(tmp_path, function() {
-				if (err) {
-					throw err;
-				}
 
-				topic.img = config.relative_img_dir + filename;
-				topic.realpath = target_path;
-				if (topic._id) {
-					topic.modifyTime = Date.now();
-					topicDAO.update(topic._id, topic, function() {
-						res.redirect('/business/sectionList/' + category);
-					});
-					return;
-				} else {
-					topicDAO.newAndSave(topic, function() {
-						res.redirect('/business/sectionList/' + category);
-					});
-					return;
-				}
-			});
+			var data = {
+				img: config.relative_img_dir + filename,
+				realpath: target_path
+			}
+			callback(data);
+
 		});
 	});
 }
