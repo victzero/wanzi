@@ -36,6 +36,7 @@ exports.list = function(req, res, category) {
 
 			var cons = {
 				name: cate.title,
+				sortNum: cate.sortNum
 			};
 			// extend(cons, rootCate);
 			renderUtil.render(res, 'business/sectionList', {
@@ -63,6 +64,7 @@ exports.edit = function(req, res, category) {
 		var id = req.query['id'];
 		var cons = {
 			name: cate.title,
+				sortNum: cate.sortNum
 		};
 		// extend(cons, rootCate);
 		if (id) { // 修改
@@ -107,6 +109,7 @@ exports.detail = function(req, res, category) {
 			}
 			var cons = {
 				name: cate.title,
+				sortNum: cate.sortNum
 			};
 			// extend(cons, rootCate);
 			renderUtil.render(res, 'business/sectionDetail', {
@@ -147,7 +150,7 @@ exports.editP = function(req, res, category) {
 		var length = Object.keys(imgs).length;
 		var upIndex = 0;
 		var nothingIndex = 0;
-		console.log('上传文件数;' + length)
+		// console.log('上传文件数;' + length)
 		if (length != 0) {
 			for (var key in imgs) {
 				img = imgs[key];
@@ -158,18 +161,18 @@ exports.editP = function(req, res, category) {
 						topic[key] = data.img;
 						topic[key + '_rp'] = data.realpath; //rp = realpath.
 						upIndex++;
-						console.log('upIndex' + upIndex + ',length' + length)
+						// console.log('upIndex' + upIndex + ',length' + length)
 
 						if (upIndex + nothingIndex == length) { //最后一个了.
 							if (topic._id) { //修改
-								console.log('有文件修改')
+								// console.log('有文件修改')
 								topic.modifyTime = Date.now();
 								topicDAON.update(topic._id, topic, function() {
 									res.redirect('/business/sectionList/' + category);
 								});
 								return;
 							} else { //新增
-								console.log('有文件新增')
+								// console.log('有文件新增')
 								delete topic._id;
 								topicDAON.save(topic, function() {
 									res.redirect('/business/sectionList/' + category);
@@ -182,14 +185,14 @@ exports.editP = function(req, res, category) {
 				if (nothingIndex == length) { //全都没有上传.
 					//没有需要上传的文件.
 					if (topic._id && topic._id != '') {
-						console.log('有文件都未上传修改')
+						// console.log('有文件都未上传修改')
 						topic.modifyTime = Date.now();
 						topicDAON.update(topic._id, topic, function() {
 							res.redirect('/business/sectionList/' + category);
 						});
 						return;
 					} else {
-						console.log('有文件都未上传新增')
+						// console.log('有文件都未上传新增')
 						delete topic._id;
 						topicDAON.save(topic, function() {
 							res.redirect('/business/sectionList/' + category);
@@ -201,14 +204,14 @@ exports.editP = function(req, res, category) {
 		} else {
 			//没有需要上传的文件.
 			if (topic._id && topic._id != '') {
-				console.log('无文件修改' + topic)
+				// console.log('无文件修改' + topic)
 				topic.modifyTime = Date.now();
 				topicDAON.update(topic._id, topic, function() {
 					res.redirect('/business/sectionList/' + category);
 				});
 				return;
 			} else {
-				console.log('无文件新增')
+				// console.log('无文件新增')
 				delete topic._id;
 				topicDAON.save(topic, function() {
 					res.redirect('/business/sectionList/' + category);

@@ -13,16 +13,16 @@
 			</a>
 		</li>
 		{{ navs.forEach(function(obj, index){ }}
-		<li class="nav_2">
+		<li class="nav_{{= obj.sortNum }}">
 			<a href="#"> <i class="icon-book"></i>
 				<span class="title">{{= obj.title }}</span>
 				<span class="arrow "></span>
 			</a>
 			<ul class="sub-menu">
-				<li class="nav_21">
+				<li class="nav_{{= obj.sortNum }}_S">
 					<a href="/business/sectionList/{{= obj.pathname }}">查询</a>
 				</li>
-				<li class="nav_22">
+				<li class="nav_{{= obj.sortNum }}_E">
 					<a href="/business/sectionEdit/{{= obj.pathname }}">新增</a>
 				</li>
 			</ul>

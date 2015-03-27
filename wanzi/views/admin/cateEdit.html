@@ -61,9 +61,15 @@
 		                            </div>
 		                         </div>
 			                     <div class="form-group">
-		                            <label class="control-label col-md-2">关键词<span class="required">*</span></label>
+		                            <label class="control-label col-md-2">关键词</label>
 		                            <div class="col-md-5">
-			                            <input type="text" name="obj[keyword]" value="{{= typeof obj.keyword!='undefined' ? obj.keyword : ''}}" class="form-control required" placeholder="关键词,使用英文逗号隔开,数量建议不要超过3">
+			                            <input type="text" name="obj[keyword]" value="{{= typeof obj.keyword!='undefined' ? obj.keyword : ''}}" class="form-control" placeholder="关键词,使用英文逗号隔开,数量建议不要超过3">
+		                            </div>
+		                         </div>
+		                         <div class="form-group">
+		                            <label class="control-label col-md-2">排序号<span class="required">*</span></label>
+		                            <div class="col-md-5">
+			                            <input type="text" name="obj[sortNum]" value="{{= typeof obj.sortNum!='undefined' ? obj.sortNum : '10'}}" class="form-control required" placeholder="排序号">
 		                            </div>
 		                         </div>
 							</div>

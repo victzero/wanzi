@@ -33,6 +33,7 @@ exports.flip = function(filter, callback) {
 		skip : (filter.pageNo - 1) * filter.pageSize,
 		limit : filter.pageSize,
 		sort : {
+			sortNum: -1,
 			modifyTime : -1
 		}
 	};
@@ -52,7 +53,7 @@ exports.flip = function(filter, callback) {
 		filter.totalCount = count;
 
 		if (count != 0) {
-			Cate.find(query, '_id title pathname totalcount modifyTime',
+			Cate.find(query, '_id title pathname totalcount sortNum modifyTime',
 					options, function(err, docs) {
 						if (err) {
 							return callback(err);
@@ -74,6 +75,7 @@ exports.newAndSave = function(temp, callback) {
 	cate.title = temp.title;
 	cate.pathname = temp.pathname;
 	cate.keyword = temp.keyword;
+	cate.sortNum = temp.sortNum;
 	cate.save(callback);
 };
 

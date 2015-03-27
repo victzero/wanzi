@@ -17,6 +17,7 @@ var CateSchema = new Schema({
 		sortNum: { type : Number, default: 0 } ,
 		modifyTime : { type : Date, default: Date.now } ,
 	}],
+	sortNum: { type : Number, default: 10 } ,
 	inusing : { type : Boolean, default: true } ,
 	totalcount : { type : Number, default: 0 } ,
 	createTime : { type : Date, default: Date.now } ,

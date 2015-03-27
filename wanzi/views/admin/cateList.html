@@ -91,6 +91,7 @@
 											<th scope="col" style="width: 50px;" >序号</th>
 											<th scope="col" >类别名称</th>
 											<th scope="col" >地址段</th>
+											<th scope="col" >排序号</th>
 											<th scope="col" style="width: 150px;" >文章数</th>
 											<th scope="col" >更新时间</th>
 											<th scope="col" >操作</th>
@@ -103,6 +104,7 @@
 												<td><a href="/admin/sectionList/{{= obj.pathname }}">{{= obj.title }}</a></td>
 												<td>{{= obj.pathname }}</td>
 												<td>{{= obj.totalcount }}</td>
+												<td>{{= obj.sortNum }}</td>
 												<td>{{= fmt.format_date(obj.modifyTime) }}</td>
 												<td>
 													<a href="/admin/sectionList/{{= obj.pathname }}">查看该类别</a>&nbsp;&nbsp;&nbsp;
