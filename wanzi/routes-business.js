@@ -24,6 +24,7 @@ module.exports = function(app) {
 
 	//访客管理
 	app.get('/business/vistor/list', vistorController.list);
+	app.post('/business/vistor/list', vistorController.list);
 
 	//动态类别,section
 	//查询

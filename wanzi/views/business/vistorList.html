@@ -44,14 +44,14 @@
 					</div>
 					<div class="portlet-body form">
 						<!-- BEGIN FORM-->
-						<form class="form-horizontal" method="post" action="/business/sectionList/{{= locals.category }}">
+						<form id="searchForm" class="form-horizontal" method="post" action="/business/vistor/list" data-method="post" data-action="/business/vistor/list" data-async="false">
 							<div class="form-body">
 								<div class="row">
 	                               <div class="col-md-3">
 	                                  <div class="form-group">
 	                                     <label class="control-label col-md-4">标题</label>
 	                                     <div class="col-md-8">
-	                                     	<input type="text" name="filter[name]" value="{{= typeof locals.filter.name != 'undefined' ? locals.filter.name : '' }}" class="form-control"> 
+	                                     	<input type="text" name="query[name]" value="{{= typeof locals.query.name != 'undefined' ? locals.query.name : '' }}" class="form-control"> 
 	                                     </div>
 	                                  </div>
 	                               </div>
