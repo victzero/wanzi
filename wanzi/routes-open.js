@@ -4,6 +4,7 @@ var home = require('./controllers/open/home');
 var topic = require('./controllers/open/topic');
 var error = require('./controllers/error');
 var config = require('./config');
+var vistorController = require('./controllers/open/vistorController');
 
 module.exports = function(app) {
 
@@ -14,26 +15,30 @@ module.exports = function(app) {
 	app.get('/list/:category', topic.list);
 	app.get('/list/:category/:pageNo', topic.list);
 
+	//登录
+	app.get('/vistor/login', vistorController.tempLogin);
+	app.post('/vistor/login', vistorController.tempLogin);
+
 	app.get('/company/info', function(req, res) {
 		res.render('open/companyInfo', {
-			title : '科盛护栏-关于我们',
-			navID : '2'
+			title: '科盛护栏-关于我们',
+			navID: '2'
 		});
 		return;
 	});
 
 	app.get('/company/contact', function(req, res) {
 		res.render('open/companyContact', {
-			title : '科盛护栏-联系我们',
-			navID : '5'
+			title: '科盛护栏-联系我们',
+			navID: '5'
 		});
 		return;
 	});
-	
+
 	app.get('/company/honors', function(req, res) {
 		res.render('open/honors', {
-			title : '科盛护栏-荣誉资质',
-			navID : '6'
+			title: '科盛护栏-荣誉资质',
+			navID: '6'
 		});
 		return;
 	});

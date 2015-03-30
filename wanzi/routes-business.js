@@ -1,9 +1,11 @@
 //TODO:商家使用界面.
 var url = require('url');
 
+var controller = './controllers/business';
 var home = require('./controllers/business/home');
 var login = require('./controllers/business/login');
 var section = require('./controllers/business/section');
+var vistorController = require(controller + '/vistorController');
 
 module.exports = function(app) {
 
@@ -19,6 +21,9 @@ module.exports = function(app) {
 	app.get('/business/login', login.loginG);
 	app.post('/business/login', login.loginP);
 	app.get('/business/logout', login.logout);
+
+	//访客管理
+	app.get('/business/vistor/list', vistorController.list);
 
 	//动态类别,section
 	//查询

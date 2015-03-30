@@ -12,7 +12,7 @@ var schema = new Schema({
 		index: true,
 		unique: true
 	},
-	val: {
+	constval: {
 		type: String
 	},
 

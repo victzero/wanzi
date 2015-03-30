@@ -51,7 +51,7 @@
 	                                  <div class="form-group">
 	                                     <label class="control-label col-md-4">标题</label>
 	                                     <div class="col-md-8">
-	                                     	<input type="text" name="s_title" value="{{= typeof locals.s_title != 'undefined' ? locals.s_title : '' }}" class="form-control"> 
+	                                     	<input type="text" name="filter[name]" value="{{= typeof locals.filter.name != 'undefined' ? locals.filter.name : '' }}" class="form-control"> 
 	                                     </div>
 	                                  </div>
 	                               </div>
@@ -89,9 +89,9 @@
 									<thead>
 										<tr>
 											<th scope="col" style="width: 50px;" >序号</th>
-											<th scope="col" >标题</th>
-											<th scope="col" style="width: 150px;" >封面缩略图</th>
-											<th scope="col" >阅读次数</th>
+											<th scope="col" >昵称</th>
+											<th scope="col" >登录名</th>
+											<!-- <th scope="col" >用户类型</th> -->
 											<th scope="col" >更新时间</th>
 											<th scope="col" >操作</th>
 										</tr>
@@ -100,14 +100,13 @@
 										{{ list.forEach(function(obj, index){ }}
 											<tr>
 												<td>{{= (filter.pageNo-1) * filter.pageSize + index + 1 }}</td>
-												<td>{{= obj.title }}</td>
-												<td><img alt="" src="{{= obj.img }}" style="width: 130px; height: 100px;" class="img-responsive"></td>
-												<td>{{= obj.num_read }}</td>
+												<td>{{= obj.aliasname }}</td>
+												<td>{{= obj.name }}</td>
 												<td>{{= fmt.format_date(obj.modifyTime) }}</td>
 												<td>
-													<a href="/business/sectionDetail/{{= locals.category }}?id={{= obj._id }}">详细</a>&nbsp;&nbsp;&nbsp;
+													<!-- <a href="/business/sectionDetail/{{= locals.category }}?id={{= obj._id }}">详细</a>&nbsp;&nbsp;&nbsp;
 													<a href="/business/sectionEdit/{{= locals.category }}?id={{= obj._id }}">修改</a>&nbsp;&nbsp;&nbsp;
-													<a href="/business/sectionRemove/{{= locals.category }}?id={{= obj._id }}">删除</a>
+													<a href="/business/sectionRemove/{{= locals.category }}?id={{= obj._id }}">删除</a> -->
 												</td>
 											</tr>
 										{{ }); }}
@@ -132,7 +131,7 @@
 	</div>
 	<!-- END CONTAINER -->
 	{{ include ./include/footer.html }}
-	<script type="text/javascript">var _NAVID = '{{= cons.sortNum + "_S" }}';</script>
+	<script type="text/javascript">var _NAVID = 'A';</script>
 	{{ include ./include/scripts.html }}
 	<script>
 		jQuery(document).ready(function() {       

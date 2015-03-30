@@ -26,6 +26,8 @@ require('./topic');
 require('./cate');
 require('./item');
 require('./fetch/tactics');
+require('./constant');
+require('./comment');
 
 exports.User = mongoose.model('USER');
 exports.Bser = mongoose.model('BSER');
@@ -34,3 +36,5 @@ exports.Topic = mongoose.model('TOPIC');
 exports.Cate = mongoose.model('CATE');
 exports.Item = mongoose.model('ITEM');
 exports.Tactics = mongoose.model('TACTICS');
+exports.Const = mongoose.model('CONSTANT');
+exports.Comment = mongoose.model('COMMENT');

@@ -20,10 +20,8 @@ exports.getById = function(id, callback) {
  * @param  {Function} cb  [description]
  * @return {[type]}       [description]
  */
-exports.getByProperty = getByProperty = function(key, val, cb) {
-	mdao.findOne({
-		key: val
-	}, cb)
+exports.getByProperty = function(query, cb) {
+	mdao.findOne(query, cb)
 }
 
 /**
@@ -107,9 +105,9 @@ exports.flip = function(query, filter, fields, callback) {
  */
 exports.save = function(obj, cb) {
 	if (obj.id && obj.id != '') {
-		update(obj.id, obj, cb);
+		exports.update(obj.id, obj, cb);
 	} else {
-		create(obj, cb);
+		exports.create(obj, cb);
 	}
 }
 
@@ -119,7 +117,7 @@ exports.save = function(obj, cb) {
  * @param  {Function} cb   [description]
  * @return {[type]}        [description]
  */
-exports.create = create = function(temp, cb) {
+exports.create = function(temp, cb) {
 	var entity = new mdao(temp);
 	entity.save(cb);
 }
@@ -131,7 +129,7 @@ exports.create = create = function(temp, cb) {
  * @param  {Function} callback [description]
  * @return {[type]}            [description]
  */
-exports.update = update = function(id, obj, callback) {
+exports.update = function(id, obj, callback) {
 	delete obj._id;
 	mdao.update({
 		_id: id
@@ -139,3 +137,38 @@ exports.update = update = function(id, obj, callback) {
 }
 
 /********** 定制方法 ************/
+exports.getVistorNum = function(cb) {
+	exports.getByProperty({
+		'name': 'VISTOR_NUM'
+	}, function(err, obj) {
+		if (err) {
+			throw err;
+		}
+		// console.log(obj)
+		if (!obj) {
+			save({
+				name: 'VISTOR_NUM',
+				constval: 1
+			}, function() {
+				cb(1)
+			});
+		} else {
+			// console.log('und?:' + obj.constval)
+			var cvl = parseInt(obj.constval) + 1;
+			exports.update({
+				_id: obj._id
+			}, {
+				constval: cvl
+			}, function() {
+				// console.log(cvl)
+				cb(cvl)
+			});
+		}
+	})
+}
+
+
+// getVistorNum(function(n){
+// 	console.log(n)
+// 	process.exit()
+// })
