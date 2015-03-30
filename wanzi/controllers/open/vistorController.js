@@ -58,6 +58,10 @@ exports.tempLogin = function(req, res) {
 					type: type
 				};
 				vistorDAO.saveUser(vis, function() {
+
+					//新建用户, 存入session
+					req.session.vistor = vis;
+
 					res.json({
 						'code': 1,
 						'msg': '用户创建成功',
@@ -70,6 +74,10 @@ exports.tempLogin = function(req, res) {
 
 		} else { //该用户已经存在, 校验密码
 			if (obj.password == md5(password)) {
+
+				//存入session
+				req.session.vistor = obj;
+
 				res.json({
 					'code': 2,
 					'msg': '用户成功登录',
