@@ -6,7 +6,6 @@ var zeroApp = function() {
 			if (clazz && typeof(_NAVID) != 'undefined') {
 				var end = _NAVID.indexOf('_');
 				var suff;
-				console.log(end)
 				if (end == -1) {
 					suff = _NAVID.substring(0, 1)
 				} else {

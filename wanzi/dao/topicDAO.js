@@ -34,16 +34,28 @@ exports.flip = function(filter, callback) {
 		query.title = new RegExp(keyword, 'i');
 	}
 	query.category = filter.category;
-	Topic.find(query, '_id title category img imgalt num_zan num_cai num_comment num_read modifyTime', options, function(err, docs) {
+
+	Topic.count(query, function(err, count) {
 		if (err) {
-			return callback(err);
+			throw err;
 		}
-		if (docs.length === 0) {
+		filter.totalCount = count;
+
+		if (count != 0) {
+			Topic.find(query, '_id title category img imgalt num_zan num_cai num_comment num_read modifyTime', options, function(err, docs) {
+				if (err) {
+					return callback(err);
+				}
+				if (docs.length === 0) {
+					return callback(null, []);
+				}
+				return callback(null, docs);
+
+			});
+		} else {
 			return callback(null, []);
 		}
-		return callback(null, docs);
-
-	});
+	})
 }
 
 exports.newAndSave = function(temp, callback) {

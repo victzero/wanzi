@@ -22,6 +22,7 @@ exports.list = function(req, res, category) {
 			res.redirect('/404');
 			return;
 		}
+
 		var stitle = req.query['s_title'] || req.body['s_title'];
 		var filter = new FlipFilter(req.body.filter);
 		filter.category = category;
