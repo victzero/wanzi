@@ -3,6 +3,7 @@ var mongoClient = mongodb.MongoClient;
 var config = require('../config');
 var pool = require('./daonPool').pool;
 var ObjectID = mongodb.ObjectID;
+var cateDAO = require('../dao/cateDAO')
 
 exports.save = function(obj, callback) {
 	pool.acquire(function(err, db) {
@@ -10,17 +11,19 @@ exports.save = function(obj, callback) {
 			throw err;
 		} else {
 			var topicsDAO = db.collection('topics');
-			// if (obj._id) { //更新
-
-			// } else { //新增,能够自动生成_id.
 			topicsDAO.save(obj, function(err, result) {
 				if (err) {
 					throw err;
 				}
 
-				callback(result)
+				//文章数+1
+				console.log(obj)
+				cateDAO.updateNumTopic(obj.category, function() {
+					callback(result)
+				})
+				// callback(result)
+
 			});
-			// }
 		}
 	});
 

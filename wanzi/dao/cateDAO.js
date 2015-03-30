@@ -3,42 +3,55 @@ var Cate = model.Cate;
 
 exports.getCateByPN = function(pathname, callback) {
 	Cate.findOne({
-		'pathname' : pathname
+		'pathname': pathname
 	}, callback);
+}
+
+exports.updateNumTopic = function(pathname, callback) {
+	Cate.findOne({
+		'pathname': pathname
+	}, function(err, cate) {
+		if (err) {
+			throw err;
+		}
+
+		cate.totalcount = cate.totalcount + 1;
+		cate.save(callback)
+	});
 }
 
 exports.getCateById = function(id, callback) {
 	Cate.findOne({
-		_id : id
+		_id: id
 	}, callback);
 };
 
 exports.removeById = function(id, callback) {
 	Cate.remove({
-		_id : id
+		_id: id
 	}, callback);
 }
 
 exports.shutById = function(id, callback) {
 	Cate.update({
-		_id : id
+		_id: id
 	}, {
-		inusing : false
+		inusing: false
 	}, callback);
 }
 
 // 对cate进行分页.
 exports.flip = function(filter, callback) {
 	var options = {
-		skip : (filter.pageNo - 1) * filter.pageSize,
-		limit : filter.pageSize,
-		sort : {
+		skip: (filter.pageNo - 1) * filter.pageSize,
+		limit: filter.pageSize,
+		sort: {
 			sortNum: -1,
-			modifyTime : -1
+			modifyTime: -1
 		}
 	};
 	var query = {
-		inusing : true
+		inusing: true
 	};
 	if (filter.title) {
 		var keyword = filter.title.replace(/[\*\^\&\(\)\[\]\+\?\\]/g, '');
@@ -54,16 +67,17 @@ exports.flip = function(filter, callback) {
 
 		if (count != 0) {
 			Cate.find(query, '_id title pathname totalcount sortNum modifyTime',
-					options, function(err, docs) {
-						if (err) {
-							return callback(err);
-						}
-						if (docs.length === 0) {
-							return callback(null, []);
-						}
-						return callback(null, docs);
+				options,
+				function(err, docs) {
+					if (err) {
+						return callback(err);
+					}
+					if (docs.length === 0) {
+						return callback(null, []);
+					}
+					return callback(null, docs);
 
-					});
+				});
 		} else {
 			return callback(null, []);
 		}
@@ -82,6 +96,6 @@ exports.newAndSave = function(temp, callback) {
 exports.update = function(id, cate, callback) {
 	delete cate._id;
 	Cate.update({
-		_id : id
+		_id: id
 	}, cate, callback);
 }

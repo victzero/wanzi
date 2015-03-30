@@ -21,6 +21,7 @@ mongoose.connect(config.db, options, function(err) {
 
 require('./user');
 require('./bser');
+require('./vistor');
 require('./topic');
 require('./cate');
 require('./item');
@@ -28,6 +29,7 @@ require('./fetch/tactics');
 
 exports.User = mongoose.model('USER');
 exports.Bser = mongoose.model('BSER');
+exports.VISTOR = mongoose.model('VISTOR');
 exports.Topic = mongoose.model('TOPIC');
 exports.Cate = mongoose.model('CATE');
 exports.Item = mongoose.model('ITEM');

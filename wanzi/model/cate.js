@@ -19,7 +19,7 @@ var CateSchema = new Schema({
 	}],
 	sortNum: { type : Number, default: 10 } ,
 	inusing : { type : Boolean, default: true } ,
-	totalcount : { type : Number, default: 0 } ,
+	totalcount : { type : Number, default: 0 } ,//文章总数
 	createTime : { type : Date, default: Date.now } ,
 	modifyTime : { type : Date, default: Date.now } ,
 });

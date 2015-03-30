@@ -91,6 +91,7 @@
 											<th scope="col" style="width: 50px;" >序号</th>
 											<th scope="col" >标题</th>
 											<th scope="col" style="width: 150px;" >封面缩略图</th>
+											<th scope="col" >阅读次数</th>
 											<th scope="col" >更新时间</th>
 											<th scope="col" >操作</th>
 										</tr>
@@ -101,6 +102,7 @@
 												<td>{{= (filter.pageNo-1) * filter.pageSize + index + 1 }}</td>
 												<td>{{= obj.title }}</td>
 												<td><img alt="" src="{{= obj.img }}" style="width: 130px; height: 100px;" class="img-responsive"></td>
+												<td>{{= obj.num_read }}</td>
 												<td>{{= fmt.format_date(obj.modifyTime) }}</td>
 												<td>
 													<a href="/business/sectionDetail/{{= locals.category }}?id={{= obj._id }}">详细</a>&nbsp;&nbsp;&nbsp;
