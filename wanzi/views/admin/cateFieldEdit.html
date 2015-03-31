@@ -16,7 +16,7 @@
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->			
 					<h3 class="page-title">
-						{{= cons.name }}管理--添加
+						{{= cons.name }}管理--属性管理
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li>
@@ -28,7 +28,7 @@
 							<a href="/admin/cateList">{{= cons.name }}管理</a>
 							<i class="fa fa-angle-right"></i>
 						</li>
-						<li>添加</li>
+						<li>属性管理</li>
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
 				</div>
@@ -38,7 +38,7 @@
 			<div class="tab-pane ">
 				<div class="portlet box green">
 					<div class="portlet-title">
-						<div class="caption"><i class="fa fa-reorder"></i>{{= cons.name }}添加</div>
+						<div class="caption"><i class="fa fa-reorder"></i>{{= cons.name }}</div>
 						<div class="tools">
 							<a href="javascript:;" class="collapse"></a>
 						</div>
@@ -51,7 +51,7 @@
 		                         <div class="form-group">
 		                            <label class="control-label col-md-2">类别名称<span class="required">*</span></label>
 		                            <div class="col-md-5">
-			                            <input type="text" name="obj[title]" value="{{= typeof obj.title!='undefined' ? obj.title : ''}}" class="form-control required" placeholder="类别名称">
+			                            <input type="text" name="obj[title]" value="{{= typeof obj.title!='undefined' ? obj.title : ''}}" class="form-control required" placeholder="类别名称" disabled="disabled">
 		                            </div>
 		                         </div>
 		                         <div class="form-group">
@@ -63,19 +63,9 @@
 			                     <div class="form-group">
 		                            <label class="control-label col-md-2">关键词<span class="required">*</span></label>
 		                            <div class="col-md-5">
-			                            <input type="text" name="obj[keyword]" value="{{= typeof obj.keyword!='undefined' ? obj.keyword : ''}}" class="form-control required" placeholder="关键词,使用英文逗号隔开,数量建议不要超过3">
+			                            <input type="text" name="obj[keyword]" value="{{= typeof obj.keyword!='undefined' ? obj.keyword : ''}}" class="form-control required" placeholder="关键词,使用英文逗号隔开,数量建议不要超过3" disabled="disabled">
 		                            </div>
 		                         </div>
-							</div>
-							<div class="form-actions fluid">
-								<div class="row">
-									<div class="col-md-12">
-										<div class="col-md-offset-8 col-md-2">
-											<button type="submit" class="btn green">提交</button>
-											<button type="button" onclick="historyGoBack(-1);" class="btn default">返回</button>
-										</div>
-									</div>
-								</div>
 							</div>
 						</form>
 						<!-- END FORM-->                

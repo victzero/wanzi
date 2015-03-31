@@ -92,7 +92,8 @@
 											<th scope="col" >类别名称</th>
 											<th scope="col" >地址段</th>
 											<th scope="col" >排序号</th>
-											<th scope="col" style="width: 150px;" >文章数</th>
+											<th scope="col" >文章数</th>
+											<th scope="col" >评论功能</th>
 											<th scope="col" >更新时间</th>
 											<th scope="col" >操作</th>
 										</tr>
@@ -103,9 +104,10 @@
 												<td>{{= (filter.pageNo-1) * filter.pageSize + index + 1 }}</td>
 												<td><a href="/admin/sectionList/{{= obj.pathname }}">{{= obj.title }}</a></td>
 												<td>{{= obj.pathname }}</td>
-												<td>{{= obj.totalcount }}</td>
 												<td>{{= obj.sortNum }}</td>
+												<td>{{= obj.totalcount }}</td>
 												<td>{{= fmt.format_date(obj.modifyTime) }}</td>
+												<td>{{= obj.allowComment == true ? '已开启' : '关闭中'}}</td>
 												<td>
 													<a href="/admin/sectionList/{{= obj.pathname }}">查看该类别</a>&nbsp;&nbsp;&nbsp;
 													<a href="/admin/cateFieldEdit?id={{= obj._id }}">属性管理</a>&nbsp;&nbsp;&nbsp;
