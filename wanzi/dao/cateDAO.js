@@ -66,7 +66,7 @@ exports.flip = function(filter, callback) {
 		filter.totalCount = count;
 
 		if (count != 0) {
-			Cate.find(query, '_id title pathname totalcount sortNum modifyTime',
+			Cate.find(query, '_id title pathname totalcount sortNum allowComment modifyTime',
 				options,
 				function(err, docs) {
 					if (err) {

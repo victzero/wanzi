@@ -67,6 +67,15 @@
 		                            </div>
 		                         </div>
 		                         <div class="form-group">
+									<label class="control-label col-md-2">开启评论</label>
+									<div class="col-md-5 radio-list">
+										<label class="radio-inline">
+										<input type="radio" name="obj[allowComment]" value="true" {{= obj.allowComment == true ? 'checked' : ''}}> 是 </label>
+										<label class="radio-inline">
+										<input type="radio" name="obj[allowComment]" value="false" {{= obj.allowComment == true ? '' : 'checked'}}> 否 </label>
+									</div>
+								</div>
+		                         <div class="form-group">
 		                            <label class="control-label col-md-2">排序号<span class="required">*</span></label>
 		                            <div class="col-md-5">
 			                            <input type="text" name="obj[sortNum]" value="{{= typeof obj.sortNum!='undefined' ? obj.sortNum : '10'}}" class="form-control required" placeholder="排序号">
