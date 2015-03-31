@@ -4,7 +4,10 @@ var home = require('./controllers/open/home');
 var topic = require('./controllers/open/topic');
 var error = require('./controllers/error');
 var config = require('./config');
-var vistorController = require('./controllers/open/vistorController');
+
+var ctrlHome = './controllers/open/';
+var vistorController = require(ctrlHome + 'vistorController');
+var topicController = require(ctrlHome + 'topicController');
 
 module.exports = function(app) {
 
@@ -18,6 +21,19 @@ module.exports = function(app) {
 	//登录
 	app.get('/vistor/login', vistorController.tempLogin);
 	app.post('/vistor/login', vistorController.tempLogin);
+
+	//动态类别. eg: /topic/list/testing?pageNo=2
+	app.get('/topic/list/*', function(req, res) {
+		sectionSplit(req, res, topicController.list);
+	});
+	app.post('/topic/list/*', function(req, res) {
+		sectionSplit(req, res, topicController.list);
+	});
+	//详情. eg: /topic/detail/testing?id=***
+	app.get('/topic/detail/*', function(req, res) {
+		sectionSplit(req, res, topicController.detail);
+	});
+
 
 	app.get('/company/info', function(req, res) {
 		res.render('open/companyInfo', {
@@ -51,3 +67,12 @@ module.exports = function(app) {
 	});
 
 };
+
+var sectionSplit = function(req, res, callback) {
+	var pathname = url.parse(req.url).pathname;
+	var paths = pathname.split('/');
+	var args = paths.slice(3);
+
+	callback.apply(null, [req, res].concat(args));
+	return;
+}
