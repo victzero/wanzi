@@ -111,3 +111,4 @@ exports.detail = function(req, res, category) {
 		});
 	});
 }
+

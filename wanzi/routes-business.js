@@ -6,6 +6,7 @@ var home = require('./controllers/business/home');
 var login = require('./controllers/business/login');
 var section = require('./controllers/business/section');
 var vistorController = require(controller + '/vistorController');
+var commentController = require(controller + '/commentController');
 
 module.exports = function(app) {
 
@@ -48,6 +49,10 @@ module.exports = function(app) {
 	//删除
 	app.get('/business/sectionRemove/*', function(req, res) {
 		sectionSplit(req, res, section.remove);
+	});
+	//评论
+	app.get('/business/sectionComment/*', function(req, res) {
+		sectionSplit(req, res, commentController.list)
 	});
 }
 

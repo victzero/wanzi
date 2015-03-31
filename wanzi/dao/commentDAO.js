@@ -137,3 +137,14 @@ exports.update = function(id, obj, callback) {
 }
 
 /********** 定制方法 ************/
+/**
+ *  根据所属文章主键和分页信息获取评论
+ * @param  {[type]} topicID [description]
+ * @return {[type]}         [description]
+ */
+exports.flipComments = function(topicID, filter, cb) {
+	//(query, filter, fields, callback) 
+	exports.flip({
+		topicID: topicID
+	}, filter, 'title content vistorName num_zan num_cai', cb);
+}

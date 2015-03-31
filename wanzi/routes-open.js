@@ -8,6 +8,7 @@ var config = require('./config');
 var ctrlHome = './controllers/open/';
 var vistorController = require(ctrlHome + 'vistorController');
 var topicController = require(ctrlHome + 'topicController');
+var commentController = require(ctrlHome + 'commentController');
 
 module.exports = function(app) {
 
@@ -33,7 +34,13 @@ module.exports = function(app) {
 	app.get('/topic/detail/*', function(req, res) {
 		sectionSplit(req, res, topicController.detail);
 	});
-
+	//进行评论.
+	app.get('/topic/comment/edit', function(req, res) {
+		commentController.comment(req, res);
+	});
+	app.post('/topic/comment/edit', function(req, res) {
+		commentController.comment(req, res);
+	});
 
 	app.get('/company/info', function(req, res) {
 		res.render('open/companyInfo', {

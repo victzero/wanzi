@@ -20,6 +20,7 @@ var schema = new Schema({
 	},
 	topicID: {// 所属文章主键
 		type: String,
+		ref: 'TOPIC'
 	},
 
 	num_zan: { type : Number, default: 0 } ,//赞

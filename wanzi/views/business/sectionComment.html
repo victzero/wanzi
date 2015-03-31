@@ -15,7 +15,7 @@
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->			
 					<h3 class="page-title">
-						{{= cons.name }}管理--查询
+						{{= topic.title }}--评论查询
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li>
@@ -24,7 +24,7 @@
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							<a href="/business/sectionList/{{= locals.category }}">{{= cons.name }}管理</a>
+							<a href="/business/sectionList/{{= locals.category }}">评论管理</a>
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>查询</li>
@@ -32,12 +32,10 @@
 					<!-- END PAGE TITLE & BREADCRUMB-->
 				</div>
 			</div>
-			<!-- END PAGE HEADER-->
-			<!-- BEGIN PAGE CONTENT-->
 			<div class="tab-pane ">
 				<div class="portlet box green">
 					<div class="portlet-title">
-						<div class="caption"><i class="fa fa-reorder"></i>{{= cons.name }}查询</div>
+						<div class="caption"><i class="fa fa-reorder"></i>评论查询</div>
 						<div class="tools">
 							<a href="javascript:;" class="collapse"></a>
 						</div>
@@ -78,7 +76,7 @@
 					<!-- BEGIN SAMPLE TABLE PORTLET-->
 					<div class="portlet box blue">
 						<div class="portlet-title">
-							<div class="caption"><i class="fa fa-cogs"></i>{{= cons.name }}结果</div>
+							<div class="caption"><i class="fa fa-cogs"></i>评论列表</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse"></a>
 							</div>
@@ -90,10 +88,10 @@
 										<tr>
 											<th scope="col" style="width: 50px;" >序号</th>
 											<th scope="col" >标题</th>
-											<th scope="col" style="width: 150px;" >封面缩略图</th>
-											<th scope="col" >阅读次数</th>
-											{{- cate.allowComment == true ? '<th scope="col" >评论总数</th>' : ''}}
-											<th scope="col" >更新时间</th>
+											<th scope="col" >内容</th>
+											<th scope="col" >评论人昵称</th>
+											<th scope="col" >赞</th>
+											<th scope="col" >评论时间</th>
 											<th scope="col" >操作</th>
 										</tr>
 									</thead>
@@ -102,14 +100,11 @@
 											<tr>
 												<td>{{= (filter.pageNo-1) * filter.pageSize + index + 1 }}</td>
 												<td>{{= obj.title }}</td>
-												<td><img alt="" src="{{= obj.img }}" style="width: 130px; height: 100px;" class="img-responsive"></td>
-												<td>{{= obj.num_read }}</td>
-												{{- cate.allowComment == true ? '<td>'+obj.num_comment+'</td>' : ''}}
+												<td>{{= obj.content }}</td>
+												<td>{{= obj.vistorName }}</td>
+												<td>{{= obj.num_zan }}</td>
 												<td>{{= fmt.format_date(obj.modifyTime) }}</td>
 												<td>
-													{{ if(cate.allowComment == true){ }}
-<a href="/business/sectionComment/{{= locals.category }}?tid={{= obj._id }}">查看评论</a>&nbsp;&nbsp;&nbsp;
-													{{ } }}
 													<a href="/business/sectionDetail/{{= locals.category }}?id={{= obj._id }}">详细</a>&nbsp;&nbsp;&nbsp;
 													<a href="/business/sectionEdit/{{= locals.category }}?id={{= obj._id }}">修改</a>&nbsp;&nbsp;&nbsp;
 													<a href="/business/sectionRemove/{{= locals.category }}?id={{= obj._id }}">删除</a>
@@ -137,7 +132,7 @@
 	</div>
 	<!-- END CONTAINER -->
 	{{ include ./include/footer.html }}
-	<script type="text/javascript">var _NAVID = '{{= cons.sortNum + "_S" }}';</script>
+	<script type="text/javascript">var _NAVID = '{{= cate.sortNum + "_S" }}';</script>
 	{{ include ./include/scripts.html }}
 	<script>
 		jQuery(document).ready(function() {       

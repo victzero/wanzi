@@ -45,6 +45,7 @@ exports.list = function(req, res, category) {
 				list: list,
 				s_title: stitle,
 				category: category,
+				cate: cate,
 				cons: cons,
 				filter: filter.init()
 			});
