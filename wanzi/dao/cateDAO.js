@@ -1,6 +1,17 @@
 var model = require('../model');
 var Cate = model.Cate;
 
+/**
+ * 新建
+ * @param  {[type]}   temp [description]
+ * @param  {Function} cb   [description]
+ * @return {[type]}        [description]
+ */
+exports.create = function(temp, cb) {
+	var entity = new Cate(temp);
+	entity.save(cb);
+}
+
 exports.getCateByPN = function(pathname, callback) {
 	Cate.findOne({
 		'pathname': pathname

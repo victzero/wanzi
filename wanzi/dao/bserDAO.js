@@ -18,7 +18,12 @@ exports.newAndSave = function(temp, callback) {
 	var bser = new Bser();
 	bser.name = temp.name;
 	bser.aliasname = temp.aliasname;
-	bser.password = md5('123456'); //新用户默认密码为123456
+	if (temp.password) {
+		bser.password = md5(temp.password);
+	} else {
+		bser.password = md5('123456'); //新用户默认密码为123456	
+	}
+
 	bser.save(callback);
 };
 
