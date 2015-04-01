@@ -1,4 +1,6 @@
 var INIT_CONFIG = {
+	//是否需要清空所有业务数据.只有在第一次部署时才可使用.
+	clearBusinessData: false,
 	admin: {
 		name: 'asdf',
 		alias: '系统管理员',

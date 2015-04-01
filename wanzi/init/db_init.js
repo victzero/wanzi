@@ -7,13 +7,16 @@ var pool = require('../daon/daonPool').pool;
 var async = require('async');
 var INIT_CONFIG = require('./config').config;
 
-var CLEAR_TABLES = [
-	'bsers', //business user
+var SYSTEM_TABLES = [
 	'cates', //所有动态分类
+
+	'bsers', //business user
+	'users', //管理员用户
+];
+var BUSINESS_TABLES = [
 	'comments', //评论
 	'constants', //全局变量
 	'topics', //所有文章
-	'users', //管理员用户
 	'vistors', //访客用户
 ];
 
@@ -42,9 +45,17 @@ var init = function() {
 
 var clearData = function(next) {
 	console.log('1. 开始清空以下表:' + CLEAR_TABLES)
-	db_clear.clear(CLEAR_TABLES, function() {
-		console.log('--------------------------------')
-		next && next();
+	db_clear.clear(SYSTEM_TABLES, function() {
+
+		if (INIT_CONFIG.clearBusinessData == true) {
+			db_clear.clear(BUSINESS_TABLES, function() {
+				console.log('--------------------------------')
+				next && next();
+			});
+		} else {
+			console.log('--------------------------------')
+			next && next();
+		}
 	});
 
 }
