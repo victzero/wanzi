@@ -50,7 +50,10 @@ app.configure(function() {
 		secret: config.session_secret,
 		store: new MongoStore({
 			mongooseConnection: mongoose.connection
-		})
+		}),
+		cookie: {
+			maxAge: 3600000
+		}
 	}));
 
 

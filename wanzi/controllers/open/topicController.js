@@ -96,6 +96,7 @@ exports.detail = function(req, res, category) {
 
 			if (obj) {
 				res.json({
+					code: 200,
 					title: obj.title,
 					topic: obj,
 				});

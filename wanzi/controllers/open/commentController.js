@@ -45,7 +45,7 @@ exports.comment = function(req, res) {
 	if (!title || title.length == 0 || !content || content.length == 0) {
 		res.json({
 			'code': -32,
-			'mess': '无内容'
+			'mess': '无评论内容'
 		});
 		return;
 	}
@@ -55,7 +55,11 @@ exports.comment = function(req, res) {
 		//找到topic,并将其num_comment + 1
 		topicDAO.getTopicById(topicID, function(err, obj) { //找到记录.
 			if (err) {
-				throw err;
+				res.json({
+					'code': -36,
+					'mess': '内部错误'
+				});
+				return;
 			}
 			if (obj) { //存在文章
 
@@ -72,7 +76,11 @@ exports.comment = function(req, res) {
 					if (err) {
 						console.log('评论失败')
 						console.log(err)
-						throw err
+						res.json({
+							'code': -37,
+							'mess': '保存失败'
+						});
+						return;
 					}
 					obj.num_comment = obj.num_comment + 1;
 					obj.save(function() {
@@ -110,7 +118,11 @@ exports.comment = function(req, res) {
 			if (err) {
 				console.log('评论失败')
 				console.log(err)
-				throw err
+				res.json({
+					'code': -38,
+					'mess': '保存失败'
+				});
+				return;
 			}
 			res.json({
 				'code': 200,

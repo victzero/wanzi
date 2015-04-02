@@ -57,16 +57,53 @@ async.series([
 				append('        |	code: 代码,200表示请求成功,负数表示请求有误');
 				append('        |	mess: code<0时有值,表示错误描述');
 				append('        |	title: 类别标题');
-				append('        |	category: category,');
 				append('        |	list: [] 数组');
 				append('        |	filter: 分页信息');
 				append('        |}');
 				append('');
+				append('---------------------------');
+
+				append('"' + obj.title + '"详情接口')
+				append('URL:' + '/topic/detail/' + obj.pathname)
+				append('Method:' + 'GET')
+				append('arguments:');
+				append('        |id       主键');
+				append('');
+				append('return:')
+				append('        |json数据:');
+				append('        |{');
+				append('        |	code: 代码,200表示请求成功,负数表示请求有误');
+				append('        |	mess: code<0时有值,表示错误描述');
+				append('        |	title: 标题');
+				append('        |	topic: 文章对象(JSON)');
+				append('        |}');
+				append('');
+				append('---------------------------');
 			};
 			cb();
 		});
 	},
 	function(cb) { //准备数据
+		append('');
+		append('评论接口');
+		append('URL:' + '/topic/comment/edit')
+		append('Method:' + 'GET, POST')
+		append('arguments:');
+		append('        |title         评论标题');
+		append('        |content       评论内容');
+		append('        |targetType    评论的目标类型, 1表示文章主题, 2表示评论');
+		append('        |topicID       评论的topic主键(必填)');
+		append('        |commentID     评论的主键(targetType=1时无效)');
+
+		append('');
+		append('return:')
+		append('        |json数据:');
+		append('        |{');
+		append('        |	code: 代码,200表示请求成功,负数表示请求有误');
+		append('        |	mess: 描述信息');
+		append('        |}');
+		append('');
+		append('---------------------------');
 		cb();
 	},
 	function(cb) { //准备数据
