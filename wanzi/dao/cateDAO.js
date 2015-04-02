@@ -12,6 +12,24 @@ exports.create = function(temp, cb) {
 	entity.save(cb);
 }
 
+exports.list = function(query, fields, callback) {
+	var options = {
+		limit: 100,
+	}
+	Cate.find(query, '_id modifyTime ' + fields,
+		options,
+		function(err, docs) {
+			if (err) {
+				throw err;
+			}
+			if (docs.length === 0) {
+				return callback(null, []);
+			}
+			return callback(null, docs);
+
+		});
+}
+
 exports.getCateByPN = function(pathname, callback) {
 	Cate.findOne({
 		'pathname': pathname

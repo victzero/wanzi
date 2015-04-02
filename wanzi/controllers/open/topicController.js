@@ -56,8 +56,8 @@ exports.list = function(req, res, category) {
 			}
 
 			res.json({
+				code: 200,
 				title: cate.title,
-				category: category,
 				list: list,
 				filter: filter.init()
 			});
@@ -111,4 +111,3 @@ exports.detail = function(req, res, category) {
 		});
 	});
 }
-
