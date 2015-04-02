@@ -12,10 +12,13 @@ var options = {
 
 }
 
+console.info('start to use mongoose connect mongoDb.')
 mongoose.connect(config.db, options, function(err) {
 	if (err) {
 		console.error('connect to %s error: ', config.db, err.message);
 		process.exit(1);
+	} else {
+		console.info('mongoose connected.')
 	}
 });
 

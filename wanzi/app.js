@@ -1,6 +1,7 @@
 var path = require('path');
 var ndir = require('ndir');
 var express = require('express');
+var MongoStore = require('connect-mongo')(express);
 var ejs = require('ejs');
 var routes = require('./routes');
 var config = require('./config').config;
@@ -10,20 +11,18 @@ var businessFilter = require('./filter/businessFilter');
 var home = require('./controllers/open/home');
 
 var maxAge = 3600000 * 24 * 30;
-var staticDir = path.join(__dirname, 'assets');// 静态文件存放更目录.
+var staticDir = path.join(__dirname, 'assets'); // 静态文件存放更目录.
 
-config.upload_temp_dir = config.upload_temp_dir
-		|| path.join(__dirname, 'assets', 'user_data');
+config.upload_temp_dir = config.upload_temp_dir || path.join(__dirname, 'assets', 'user_data');
 // ensure upload dir exists
-ndir.mkdir(config.upload_temp_dir, function(err) {// 建立上传文件目录
+ndir.mkdir(config.upload_temp_dir, function(err) { // 建立上传文件目录
 	if (err) {
 		throw err;
 	}
 });
 
-config.upload_img_dir = config.upload_img_dir
-		|| path.join(__dirname, 'assets', 'user_data', 'images');
-ndir.mkdir(config.upload_img_dir, function(err) {// 建立上传文件目录
+config.upload_img_dir = config.upload_img_dir || path.join(__dirname, 'assets', 'user_data', 'images');
+ndir.mkdir(config.upload_img_dir, function(err) { // 建立上传文件目录
 	if (err) {
 		throw err;
 	}
@@ -41,15 +40,22 @@ app.configure(function() {
 	ejs.close = '}}';
 	app.engine('.html', ejs.__express);
 	app.set('view engine', 'html');
-	app.set('views', path.join(__dirname, 'views'));// html 文件存放目录
+	app.set('views', path.join(__dirname, 'views')); // html 文件存放目录
 
 	app.use(express.cookieParser());
+
+	require('./model');
+	var mongoose = require('mongoose');
 	app.use(express.session({
-		secret : config.session_secret
+		secret: config.session_secret,
+		store: new MongoStore({
+			mongooseConnection: mongoose.connection
+		})
 	}));
 
+
 	// --- 设置中间件 ---
-	app.use(express.favicon(path.join(__dirname,'assets/img/favicon.ico')));
+	app.use(express.favicon(path.join(__dirname, 'assets/img/favicon.ico')));
 	app.use('/assets', express.static(staticDir));
 	app.use(express.logger('dev'));
 
@@ -58,7 +64,7 @@ app.configure(function() {
 	app.use('/', home.init);
 
 	app.use(express.bodyParser({
-		uploadDir : config.upload_temp_dir
+		uploadDir: config.upload_temp_dir
 	}));
 	app.use(express.methodOverride());
 
