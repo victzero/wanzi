@@ -1,0 +1,1 @@
+define("market",function(a){var r=a("jquery");a("jquery/jquery.scrollLoading"),r(".lazy-load").scrollLoading({attr:"data-src"}),a("fadeIn")});

@@ -60,6 +60,7 @@ app.configure(function() {
 	// --- 设置中间件 ---
 	app.use(express.favicon(path.join(__dirname, 'assets/img/favicon.ico')));
 	app.use('/assets', express.static(staticDir));
+	
 	app.use(express.logger('dev'));
 
 	app.use('/admin', adminFilter.userNeeded);

@@ -1,0 +1,1 @@
+define("preferred",function(r){var a=r("jquery");r("jquery/jquery.scrollLoading"),a(".lazy-load").scrollLoading({attr:"data-src"}),r("fadeIn")});

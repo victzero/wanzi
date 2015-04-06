@@ -6,6 +6,8 @@ var fs = require("fs");
 
 module.exports = function(app) {
 
+	require('./app_wanzi').route(app)
+
 	// 先进行手工路由匹配
 	manualRoute(app);
 
@@ -61,6 +63,7 @@ var manualRoute = function(app) {
 //		res.end();
 		return;
 	});
+
 
 	ar(app);
 	br(app);
