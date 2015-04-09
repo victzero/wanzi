@@ -83,10 +83,11 @@ app.configure('development', function() {
 
 // production only
 app.configure('production', function() {
-	app.use(function(err, req, res, next) {
-		console.error(err.stack);
-		res.redirect('/500');
-	});
+	//FIXME:
+	// app.use(function(err, req, res, next) {
+	// 	console.error(err.stack);
+	// 	res.redirect('/500');
+	// });
 });
 
 app.listen(app.get('port'), function() {

@@ -29,5 +29,5 @@ CKEDITOR.editorConfig = function( config ) {
 	// need to have in the Standard(s) toolbar.
 	config.removeButtons = 'Underline,Subscript,Superscript';
 	config.image_previewText='环绕文字环绕文字环绕文字环绕文字环绕文字环绕文字环绕文字环绕文字环绕文字环绕文字环绕文字环绕文字环绕文字环绕文字环绕文字环绕文字环绕文字环绕文字环绕文字环绕文字环绕文字环绕文字环绕文字环绕文字环绕文字环绕文字环绕文字环绕文字'; //预览区域显示内容
-	config.filebrowserImageUploadUrl= "/admin/fileupload"; 
+	config.filebrowserImageUploadUrl= "/res/fileupload"; 
 };

@@ -8,6 +8,9 @@ var section = require('./controllers/business/section');
 var vistorController = require(controller + '/vistorController');
 var commentController = require(controller + '/commentController');
 
+
+var file = require('./controllers/admin/file');
+
 module.exports = function(app) {
 
 	// app.get('/business/*', function(req, res){
@@ -54,6 +57,9 @@ module.exports = function(app) {
 	app.get('/business/sectionComment/*', function(req, res) {
 		sectionSplit(req, res, commentController.list)
 	});
+
+	// 文件上传
+	app.post('/res/fileupload', file.upload);
 }
 
 var sectionSplit = function(req, res, callback) {
