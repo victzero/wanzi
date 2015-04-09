@@ -146,7 +146,7 @@ exports.getVistorNum = function(cb) {
 		}
 		// console.log(obj)
 		if (!obj) {
-			save({
+			exports.save({
 				name: 'VISTOR_NUM',
 				constval: 1
 			}, function() {

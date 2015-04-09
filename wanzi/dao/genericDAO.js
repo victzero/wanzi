@@ -1,170 +1,183 @@
-var genericDAO = {}
+var zutil = require('zero').util;
 
-/**
- * 根据主键获取
- * @param  {[type]}   id       [description]
- * @param  {Function} callback [description]
- * @return {[type]}            [description]
- */
-genericDAO.getById = function(id, callback) {
-	mdao.findOne({
-		_id: id
-	}, callback);
-};
+var genericDAO = zutil.createClass({
+	mdao: null,
 
-/**
- * 根据指定属性获取记录.
- * @param  {[type]}   key [description]
- * @param  {[type]}   val [description]
- * @param  {Function} cb  [description]
- * @return {[type]}       [description]
- */
-genericDAO.getByProperty = function(query, cb) {
-	mdao.findOne(query, cb)
-}
+	/**
+	 * Constructor
+	 */
+	initialize: function(dao) {
+		mdao = dao;
+	},
 
-/**
- * 物理删除
- * @param  {[type]}   id       [description]
- * @param  {Function} callback [description]
- * @return {[type]}            [description]
- */
-genericDAO.removeById = function(id, callback) {
-	mdao.remove({
-		_id: id
-	}, callback);
-}
+	/**
+	 * 根据主键获取
+	 * @param  {[type]}   id       [description]
+	 * @param  {Function} callback [description]
+	 * @return {[type]}            [description]
+	 */
+	getById: function(id, callback) {
+		mdao.findOne({
+			_id: id
+		}, callback);
+	},
 
-/**
- * 逻辑删除
- * @param  {[type]}   id       [description]
- * @param  {Function} callback [description]
- * @return {[type]}            [description]
- */
-genericDAO.shutById = function(id, callback) {
-	mdao.update({
-		_id: id
-	}, {
-		inusing: false
-	}, callback);
-}
+	/**
+	 * 根据指定属性获取记录.
+	 * @param  {[type]}   key [description]
+	 * @param  {[type]}   val [description]
+	 * @param  {Function} cb  [description]
+	 * @return {[type]}       [description]
+	 */
+	getByProperty: function(query, cb) {
+		mdao.findOne(query, cb)
+	},
 
-/**
- * 全量查询
- * @param  {[type]}   query    [description]
- * @param  {[type]}   fields   [description]
- * @param  {Function} callback [description]
- * @return {[type]}            [description]
- */
-genericDAO.list = function(query, fields, callback) {
-	var options = {
-		limit: 100,
-	}
-	mdao.find(query, '_id modifyTime ' + fields,
-		options,
-		function(err, docs) {
+	/**
+	 * 物理删除
+	 * @param  {[type]}   id       [description]
+	 * @param  {Function} callback [description]
+	 * @return {[type]}            [description]
+	 */
+	removeById: function(id, callback) {
+		mdao.remove({
+			_id: id
+		}, callback);
+	},
+
+	/**
+	 * 逻辑删除
+	 * @param  {[type]}   id       [description]
+	 * @param  {Function} callback [description]
+	 * @return {[type]}            [description]
+	 */
+	shutById: function(id, callback) {
+		mdao.update({
+			_id: id
+		}, {
+			inusing: false
+		}, callback);
+	},
+
+	/**
+	 * 全量查询
+	 * @param  {[type]}   query    [description]
+	 * @param  {[type]}   fields   [description]
+	 * @param  {Function} callback [description]
+	 * @return {[type]}            [description]
+	 */
+	list: function(query, fields, callback) {
+		var options = {
+			limit: 100,
+		}
+		mdao.find(query, '_id modifyTime ' + fields,
+			options,
+			function(err, docs) {
+				if (err) {
+					throw err;
+				}
+				if (docs.length === 0) {
+					return callback(null, []);
+				}
+				return callback(null, docs);
+
+			});
+	},
+
+	/**
+	 * 分页处理.
+	 * @param  {[type]}   query    [查询条件]
+	 * @param  {[type]}   filter   [过滤条件,默认inusing=true]
+	 * @param  {[type]}   fields   [返回参数,默认包含_id, modifyTime]
+	 * @param  {Function} callback [回调函数]
+	 * @return {[type]}            [description]
+	 */
+	flip: function(query, filter, fields, callback) {
+		var options = {
+			skip: (filter.pageNo - 1) * filter.pageSize,
+			limit: filter.pageSize,
+			sort: {
+				modifyTime: -1
+			}
+		}
+
+		if (!query) {
+			query = {};
+		}
+		query.inusing = true;
+
+		mdao.count(query, function(err, count) {
 			if (err) {
 				throw err;
 			}
-			if (docs.length === 0) {
+			filter.totalCount = count;
+
+			if (count != 0) {
+				mdao.find(query, '_id modifyTime ' + fields,
+					options,
+					function(err, docs) {
+						if (err) {
+							throw err;
+						}
+						if (docs.length === 0) {
+							return callback(null, []);
+						}
+						return callback(null, docs);
+
+					});
+			} else {
 				return callback(null, []);
 			}
-			return callback(null, docs);
-
 		});
-}
+	},
 
-/**
- * 分页处理.
- * @param  {[type]}   query    [查询条件]
- * @param  {[type]}   filter   [过滤条件,默认inusing=true]
- * @param  {[type]}   fields   [返回参数,默认包含_id, modifyTime]
- * @param  {Function} callback [回调函数]
- * @return {[type]}            [description]
- */
-genericDAO.flip = function(query, filter, fields, callback) {
-	var options = {
-		skip: (filter.pageNo - 1) * filter.pageSize,
-		limit: filter.pageSize,
-		sort: {
-			modifyTime: -1
-		}
-	}
-
-	if (!query) {
-		query = {};
-	}
-	query.inusing = true;
-
-	mdao.count(query, function(err, count) {
-		if (err) {
-			throw err;
-		}
-		filter.totalCount = count;
-
-		if (count != 0) {
-			mdao.find(query, '_id modifyTime ' + fields,
-				options,
-				function(err, docs) {
-					if (err) {
-						throw err;
-					}
-					if (docs.length === 0) {
-						return callback(null, []);
-					}
-					return callback(null, docs);
-
-				});
+	/**
+	 * 保存指定对象.
+	 * @param  {[type]}   obj [description]
+	 * @param  {Function} cb  [description]
+	 * @return {[type]}       [description]
+	 */
+	save: function(obj, cb) {
+		if (obj.id && obj.id != '') {
+			this.update(obj.id, obj, cb);
 		} else {
-			return callback(null, []);
+			this.create(obj, cb);
 		}
-	});
-};
+	},
 
-/**
- * 保存指定对象.
- * @param  {[type]}   obj [description]
- * @param  {Function} cb  [description]
- * @return {[type]}       [description]
- */
-genericDAO.save = function(obj, cb) {
-	if (obj.id && obj.id != '') {
-		genericDAO.update(obj.id, obj, cb);
-	} else {
-		genericDAO.create(obj, cb);
-	}
-}
+	/**
+	 * 新建
+	 * @param  {[type]}   temp [description]
+	 * @param  {Function} cb   [description]
+	 * @return {[type]}        [description]
+	 */
+	create: function(temp, cb) {
+		var entity = new mdao(temp);
+		entity.save(cb);
+	},
 
-/**
- * 新建
- * @param  {[type]}   temp [description]
- * @param  {Function} cb   [description]
- * @return {[type]}        [description]
- */
-genericDAO.create = function(temp, cb) {
-	var entity = new mdao(temp);
-	entity.save(cb);
-}
+	/**
+	 * 更新
+	 * @param  {[type]}   id       [description]
+	 * @param  {[type]}   obj      [description]
+	 * @param  {Function} callback [description]
+	 * @return {[type]}            [description]
+	 */
+	update: function(id, obj, callback) {
+		delete obj._id;
+		mdao.update({
+			_id: id
+		}, obj, callback);
+	},
+});
 
-/**
- * 更新
- * @param  {[type]}   id       [description]
- * @param  {[type]}   obj      [description]
- * @param  {Function} callback [description]
- * @return {[type]}            [description]
- */
-genericDAO.update = function(id, obj, callback) {
-	delete obj._id;
-	mdao.update({
-		_id: id
-	}, obj, callback);
-}
 
-exports.methods = genericDAO;
 
-exports.extend = function(exp) {
-	for (var key in genericDAO) {
-		exp[key] = genericDAO[key]
-	}
-	return exp;
-}
+exports.gDAO = genericDAO;
+
+// exports.extend = function(exp) {
+// 	for (var key in genericDAO) {
+// 		exp[key] = genericDAO[key]
+// 	}
+// 	return exp;
+// }

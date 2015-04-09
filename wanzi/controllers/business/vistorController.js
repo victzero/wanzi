@@ -23,7 +23,7 @@ exports.list = function(req, res) {
 	var filter = new FlipFilter(req.body.filter);
 
 	//query, filter, fields
-	vistorDAO.flip(fq, filter, "name aliasname", function(err, list) {
+	new vistorDAO().flip(fq, filter, "name aliasname", function(err, list) {
 		if (err) {
 			throw err;
 		}

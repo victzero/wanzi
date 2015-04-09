@@ -1,31 +1,36 @@
 var model = require('../model');
 var mdao = model.Vistor;
 var crypto = require('crypto');
-var genericDAO = require('./genericDAO')
-	//继承genericDAO的方法.
-genericDAO.extend(exports);
+var genericDAO = require('./genericDAO').gDAO;
+var util = require('util')
+var zutil = require('zero').util;
 
-/********** 定制方法 ************/
-/**
- * 根据登录名查找.
- * @param  {[type]}   name     [description]
- * @param  {Function} callback [description]
- * @return {[type]}            [description]
- */
-exports.getByName = function(name, callback) {
-	exports.getByProperty({
-		'name': name
-	}, callback)
-}
+var vistorDAO = zutil.createClass(genericDAO, {
+	/**
+	 * Constructor
+	 */
+	initialize: function() {
+		this.callSuper('initialize', mdao);
+	},
 
-exports.saveUser = function(tmp, callback) {
-	tmp.password = md5(tmp.password);
-	exports.save(tmp, callback);
-}
+	/********** 定制方法 ************/
+	/**
+	 * 根据登录名查找.
+	 * @param  {[type]}   name     [description]
+	 * @param  {Function} callback [description]
+	 * @return {[type]}            [description]
+	 */
+	getByName: function(name, callback) {
+		this.getByProperty({
+			'name': name
+		}, callback)
+	},
 
-function md5(str) {
-	var md5sum = crypto.createHash('md5');
-	md5sum.update(str);
-	str = md5sum.digest('hex');
-	return str;
-}
+	saveUser: function(tmp, callback) {
+		tmp.password = zutil.md5(tmp.password);
+		this.save(tmp, callback);
+	},
+
+});
+
+exports.$ = vistorDAO;

@@ -44,7 +44,9 @@ exports.tempLogin = function(req, res) {
 		return;
 	}
 
-	vistorDAO.getByName(name, function(err, obj) {
+	vDAO = new vistorDAO();
+
+	vDAO.getByName(name, function(err, obj) {
 		if (err) {
 			throw err;
 		}
@@ -57,7 +59,7 @@ exports.tempLogin = function(req, res) {
 					password: password,
 					type: type
 				};
-				vistorDAO.saveUser(vis, function() {
+				vDAO.saveUser(vis, function() {
 
 					//新建用户, 存入session
 					req.session.vistor = vis;
