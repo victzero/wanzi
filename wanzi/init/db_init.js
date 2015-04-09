@@ -44,7 +44,7 @@ var init = function() {
 }
 
 var clearData = function(next) {
-	console.log('1. 开始清空以下表:' + CLEAR_TABLES)
+	console.log('1. 开始清空以下表:' + SYSTEM_TABLES)
 	db_clear.clear(SYSTEM_TABLES, function() {
 
 		if (INIT_CONFIG.clearBusinessData == true) {
