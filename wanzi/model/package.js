@@ -34,6 +34,8 @@ var PackageSchema = new Schema({
 	imgalt: String, //图片提示信息
 	realpath: String, //图片真实路径
 
+	inusing : { type : Boolean, default: true } ,
+
 	createTime: {
 		type: Date,
 		default: Date.now

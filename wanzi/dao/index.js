@@ -6,6 +6,8 @@ exports.ItemDAO = require('./itemDAO');
 exports.CommentDAO = require('./commentDAO');
 exports.ConstDAO = require('./constDAO');
 exports.VistorDAO = require('./vistorDAO').$;
+exports.PackageDAO = require('./packageDAO').$;
+exports.PackageCodeDAO = require('./PackageCodeDAO').$;
 
 //--------------fetch----------------
 exports.TacticsDAO = require('./fetch/tacticsDAO');

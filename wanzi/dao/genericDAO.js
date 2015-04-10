@@ -60,7 +60,7 @@ var genericDAO = zutil.createClass({
 	},
 
 	/**
-	 * 全量查询
+	 * 全量查询, listAll
 	 * @param  {[type]}   query    [description]
 	 * @param  {[type]}   fields   [description]
 	 * @param  {Function} callback [description]
@@ -138,8 +138,8 @@ var genericDAO = zutil.createClass({
 	 * @return {[type]}       [description]
 	 */
 	save: function(obj, cb) {
-		if (obj.id && obj.id != '') {
-			this.update(obj.id, obj, cb);
+		if (obj._id && obj._id != '') {
+			this.update(obj._id, obj, cb);
 		} else {
 			this.create(obj, cb);
 		}
@@ -152,6 +152,7 @@ var genericDAO = zutil.createClass({
 	 * @return {[type]}        [description]
 	 */
 	create: function(temp, cb) {
+		delete temp._id;
 		var entity = new mdao(temp);
 		entity.save(cb);
 	},

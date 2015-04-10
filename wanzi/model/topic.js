@@ -28,6 +28,9 @@ var TopicSchema = new Schema({
 	realpath: String, //图片真实路径
 	category: String, //所属分类
 	content: String, //内容.
+
+	inusing : { type : Boolean, default: true } ,
+	
 	createTime: {
 		type: Date,
 		default: Date.now

@@ -6,6 +6,7 @@ var home = require('./controllers/business/home');
 var login = require('./controllers/business/login');
 var section = require('./controllers/business/section');
 var vistorController = require(controller + '/vistorController');
+var packageController = require(controller + '/packageController');
 var commentController = require(controller + '/commentController');
 
 
@@ -29,6 +30,15 @@ module.exports = function(app) {
 	//访客管理
 	app.get('/business/vistor/list', vistorController.list);
 	app.post('/business/vistor/list', vistorController.list);
+
+	//礼包管理
+	app.get('/business/package/list', packageController.list);
+	app.post('/business/package/list', packageController.list);
+	app.get('/business/package/edit', packageController.edit);
+	app.post('/business/package/edit', packageController.editP);
+	app.get('/business/package/detail', packageController.detail);
+	app.post('/business/package/parse', packageController.parse);
+	app.get('/business/package/remove', packageController.remove);
 
 	//动态类别,section
 	//查询

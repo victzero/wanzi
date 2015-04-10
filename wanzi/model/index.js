@@ -43,3 +43,6 @@ exports.Tactics = mongoose.model('TACTICS');
 exports.Const = mongoose.model('CONSTANT');
 exports.Comment = mongoose.model('COMMENT');
 exports.Package = mongoose.model('PACKAGE');
+
+require('./package_code');
+exports.PackageCode = mongoose.model('PACKAGECODE');

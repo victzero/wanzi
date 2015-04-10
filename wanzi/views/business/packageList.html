@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="zh-CN" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="zh-CN" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!--> <html lang="zh-CN" class="no-js"> <!--<![endif]-->
+<head>
+	{{ include ./include/head.html }}
+</head>
+<body class="page-header-fixed page-sidebar-fixed page-footer-fixed ">
+	{{ include ./include/header.html }}
+	<div class="page-container">
+		{{ include ./include/body-left.html }}
+		<div class="page-content">
+			<!-- BEGIN PAGE HEADER-->
+			<div class="row">
+				<div class="col-md-12">
+					<!-- BEGIN PAGE TITLE & BREADCRUMB-->			
+					<h3 class="page-title">
+						{{= cons.name }}管理--查询
+					</h3>
+					<ul class="page-breadcrumb breadcrumb">
+						<li>
+							<i class="fa fa-home"></i>
+							<a href="/business">首页</a> 
+							<i class="fa fa-angle-right"></i>
+						</li>
+						<li>
+							<a href="/business/package/list">{{= cons.name }}管理</a>
+							<i class="fa fa-angle-right"></i>
+						</li>
+						<li>查询</li>
+					</ul>
+					<!-- END PAGE TITLE & BREADCRUMB-->
+				</div>
+			</div>
+			<!-- END PAGE HEADER-->
+			<!-- BEGIN PAGE CONTENT-->
+			<div class="tab-pane ">
+				<div class="portlet box green">
+					<div class="portlet-title">
+						<div class="caption"><i class="fa fa-reorder"></i>{{= cons.name }}查询</div>
+						<div class="tools">
+							<a href="javascript:;" class="collapse"></a>
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<!-- BEGIN FORM-->
+						<form id="searchForm" class="form-horizontal" method="post" action="/business/package/list" data-method="post" data-action="/business/package/list" data-async="false">
+							<div class="form-body">
+								<div class="row">
+	                               <div class="col-md-3">
+	                                  <div class="form-group">
+	                                     <label class="control-label col-md-4">礼包名称</label>
+	                                     <div class="col-md-8">
+	                                     	<input type="text" name="query[title]" value="{{= typeof locals.query.title != 'undefined' ? locals.query.title : '' }}" class="form-control"> 
+	                                     </div>
+	                                  </div>
+	                               </div>
+	                               <!--/span-->
+	                            </div>
+							</div>
+							<div class="form-actions fluid">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="col-md-offset-10 col-md-2">
+											<button type="submit" class="btn green">查询</button>&nbsp;&nbsp;&nbsp;
+											<button type="button" onclick="location.href='/business/package/edit';" class="btn blue">新增</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+						<!-- END FORM-->                
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<!-- BEGIN SAMPLE TABLE PORTLET-->
+					<div class="portlet box blue">
+						<div class="portlet-title">
+							<div class="caption"><i class="fa fa-cogs"></i>{{= cons.name }}结果</div>
+							<div class="tools">
+								<a href="javascript:;" class="collapse"></a>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="table-scrollable">
+								<table class="table table-striped table-bordered table-hover">
+									<thead>
+										<tr>
+											<th scope="col" style="width: 50px;" >序号</th>
+											<th scope="col" >礼包名称</th>
+											<th scope="col" >图片</th>
+											<th scope="col" >有效期</th>
+											<th scope="col" >剩余量</th>
+											<th scope="col" >更新时间</th>
+											<th scope="col" >操作</th>
+										</tr>
+									</thead>
+									<tbody>
+										{{ list.forEach(function(obj, index){ }}
+											<tr>
+												<td>{{= (filter.pageNo-1) * filter.pageSize + index + 1 }}</td>
+												<td>{{= obj.title }}</td>
+												<td><img alt="" src="{{= obj.img }}" style="width: 130px; height: 100px;" class="img-responsive"></td>
+												<td>{{= obj.yxq }}</td>
+												<td>{{= obj.syl + '/' + obj.zl }}</td>
+												<td>{{= fmt.format_date(obj.modifyTime) }}</td>
+												<td>
+													<a href="/business/package/detail?id={{= obj._id }}">详细</a>&nbsp;&nbsp;&nbsp;
+													<a href="/business/package/edit?id={{= obj._id }}">修改</a>&nbsp;&nbsp;&nbsp;
+													<a href="/business/package/remove?id={{= obj._id }}">删除</a>
+												</td>
+											</tr>
+										{{ }); }}
+									</tbody>
+								</table>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="dataTables_paginate paging_bootstrap" data-target="#searchForm">
+										{{ include ./include/pagination.html }}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- END SAMPLE TABLE PORTLET-->
+				</div>
+			</div>
+			<!-- END PAGE CONTENT-->
+		</div>
+		<!-- END PAGE -->
+	</div>
+	<!-- END CONTAINER -->
+	{{ include ./include/footer.html }}
+	<script type="text/javascript">var _NAVID = 'B';</script>
+	{{ include ./include/scripts.html }}
+	<script>
+		jQuery(document).ready(function() {       
+		   App.init();
+		   zeroApp.init();
+		});
+	</script>
+</body>
+<!-- END BODY -->
+</html>
