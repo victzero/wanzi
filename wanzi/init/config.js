@@ -11,7 +11,42 @@ var INIT_CONFIG = {
 		alias: '商家管理员',
 		pass: '123456'
 	},
-	category: [{
+	category: [
+	// {
+	// 	title: '礼包福利',
+	// 	pathname: 'lbfl',
+	// 	keyword: '礼包福利',
+	// 	allowComment: false,
+	// 	width: 200,
+	// 	height: 100,
+	// 	sortNum: 8,
+	// 	fields: [{
+	// 		name: 'yxq',
+	// 		alias: '有效期',
+	// 		type: 'String',
+	// 		editor: 'text',
+	// 		sortNum: 10
+	// 	}, {
+	// 		name: 'zl',
+	// 		alias: '总量',
+	// 		type: 'Number',
+	// 		editor: 'text',
+	// 		sortNum: 12
+	// 	}, {
+	// 		name: 'syl',
+	// 		alias: '剩余量',
+	// 		type: 'Number',
+	// 		editor: 'text',
+	// 		sortNum: 14
+	// 	}, {
+	// 		name: 'dhfs',
+	// 		alias: '兑换方式',
+	// 		type: 'String',
+	// 		editor: 'text',
+	// 		sortNum: 16
+	// 	}]
+	// },
+	{
 		title: '新闻-焦点图',
 		pathname: 'xw_jdt',
 		keyword: '新闻',
@@ -61,6 +96,18 @@ var INIT_CONFIG = {
 			type: 'String',
 			editor: 'text',
 			sortNum: 12
+		}, {
+			name: 'fxdz',
+			alias: '分享地址',
+			type: 'String',
+			editor: 'text',
+			sortNum: 14
+		}, {
+			name: 'ydcs',
+			alias: '阅读次数设置',
+			type: 'String',
+			editor: 'text',
+			sortNum: 16
 		}]
 	}, {
 		title: '评测',
@@ -80,6 +127,18 @@ var INIT_CONFIG = {
 			type: 'String',
 			editor: 'text',
 			sortNum: 12
+		}, {
+			name: 'fxdz',
+			alias: '分享地址',
+			type: 'String',
+			editor: 'text',
+			sortNum: 14
+		}, {
+			name: 'ydcs',
+			alias: '阅读次数设置',
+			type: 'String',
+			editor: 'text',
+			sortNum: 16
 		}]
 	}, {
 		title: '专题',
@@ -99,6 +158,18 @@ var INIT_CONFIG = {
 			type: 'String',
 			editor: 'text',
 			sortNum: 12
+		}, {
+			name: 'fxdz',
+			alias: '分享地址',
+			type: 'String',
+			editor: 'text',
+			sortNum: 14
+		}, {
+			name: 'ydcs',
+			alias: '阅读次数设置',
+			type: 'String',
+			editor: 'text',
+			sortNum: 16
 		}]
 	}, {
 		title: '干货',
@@ -118,6 +189,18 @@ var INIT_CONFIG = {
 			type: 'String',
 			editor: 'text',
 			sortNum: 12
+		}, {
+			name: 'fxdz',
+			alias: '分享地址',
+			type: 'String',
+			editor: 'text',
+			sortNum: 14
+		}, {
+			name: 'ydcs',
+			alias: '阅读次数设置',
+			type: 'String',
+			editor: 'text',
+			sortNum: 16
 		}]
 	}]
 }
