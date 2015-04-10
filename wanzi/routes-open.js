@@ -8,6 +8,7 @@ var config = require('./config');
 var ctrlHome = './controllers/open/';
 var vistorController = require(ctrlHome + 'vistorController');
 var topicController = require(ctrlHome + 'topicController');
+var packageController = require(ctrlHome + 'packageController');
 var commentController = require(ctrlHome + 'commentController');
 
 module.exports = function(app) {
@@ -22,6 +23,9 @@ module.exports = function(app) {
 	//登录
 	app.get('/vistor/login', vistorController.tempLogin);
 	app.post('/vistor/login', vistorController.tempLogin);
+
+	app.get('/package/list', packageController.list);
+	app.get('/package/receive', packageController.receive);
 
 	//动态类别. eg: /topic/list/testing?pageNo=2
 	app.get('/topic/list/*', function(req, res) {
@@ -40,30 +44,6 @@ module.exports = function(app) {
 	});
 	app.post('/topic/comment/edit', function(req, res) {
 		commentController.comment(req, res);
-	});
-
-	app.get('/company/info', function(req, res) {
-		res.render('open/companyInfo', {
-			title: '科盛护栏-关于我们',
-			navID: '2'
-		});
-		return;
-	});
-
-	app.get('/company/contact', function(req, res) {
-		res.render('open/companyContact', {
-			title: '科盛护栏-联系我们',
-			navID: '5'
-		});
-		return;
-	});
-
-	app.get('/company/honors', function(req, res) {
-		res.render('open/honors', {
-			title: '科盛护栏-荣誉资质',
-			navID: '6'
-		});
-		return;
 	});
 
 	app.get('/404', error.gt404);

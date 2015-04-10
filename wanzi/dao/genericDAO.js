@@ -22,6 +22,10 @@ var genericDAO = zutil.createClass({
 		}, callback);
 	},
 
+	getFirst: function(query, callback) {
+		mdao.findOne(query, callback);
+	},
+
 	/**
 	 * 根据指定属性获取记录.
 	 * @param  {[type]}   key [description]
