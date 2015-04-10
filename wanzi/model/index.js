@@ -31,6 +31,7 @@ require('./item');
 require('./fetch/tactics');
 require('./constant');
 require('./comment');
+require('./package');
 
 exports.User = mongoose.model('USER');
 exports.Bser = mongoose.model('BSER');
@@ -41,3 +42,4 @@ exports.Item = mongoose.model('ITEM');
 exports.Tactics = mongoose.model('TACTICS');
 exports.Const = mongoose.model('CONSTANT');
 exports.Comment = mongoose.model('COMMENT');
+exports.Package = mongoose.model('PACKAGE');
